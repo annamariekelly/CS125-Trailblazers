@@ -32,9 +32,9 @@ userRouter.post('/', async (req, res) => {
     try {
         console.log('creating user...');
 
-        const { id, password } = req.body;
+        const { id, password, placeCategory } = req.body;
 
-        const user = await createUser(id, password);
+        const user = await createUser(id, password, placeCategory);
 
         res.status(200).send({
             newUser: user,
@@ -49,9 +49,9 @@ userRouter.put('/', async (req, res) => {
     try {
         console.log('updating user...');
 
-        const { id, password } = req.body;
+        const { id, placeCategory } = req.body;
 
-        const user = await updateUser(id, password);
+        const user = await updateUser(id, placeCategory);
 
         res.status(200).send({
             updatedUser: user,

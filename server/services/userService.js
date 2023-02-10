@@ -5,20 +5,22 @@ const getUser = (id) => {
     return {
         id: Number(id),
         password: 'some password',
+        placeCategory: 'some type of place',
     }
 }
 
-const createUser = (id, password) => {
+const createUser = (id, password, placeCategory) => {
     return {
         id: Number(id),
         password,
+        placeCategory,
     }
 }
 
-const updateUser = (id, password) => {
+const updateUser = (id, placeCategory) => {
     return {
         id: Number(id),
-        password,
+        placeCategory,
     }
 }
 
