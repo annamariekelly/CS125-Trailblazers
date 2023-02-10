@@ -1,30 +1,30 @@
 // All services related to the user routes.
 // The logic directly accessing the database will go here.
 
-const getUser = (email) => {
+const getUser = (id) => {
     return {
-        email,
+        id: Number(id),
         password: 'some password',
     }
 }
 
-const createUser = (email, password) => {
+const createUser = (id, password) => {
     return {
-        email,
+        id: Number(id),
         password,
     }
 }
 
-const updateUser = (email, password) => {
+const updateUser = (id, password) => {
     return {
-        email,
+        id: Number(id),
         password,
     }
 }
 
-const deleteUser = (email) => {
+const deleteUser = (id) => {
     return {
-        email,
+        id,
     }
 }
 

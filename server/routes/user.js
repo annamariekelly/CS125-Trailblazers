@@ -11,13 +11,13 @@ const {
 const userRouter = express();
 userRouter.use(express.json());
 
-// Get a specific user by email
-userRouter.get('/:email', async (req, res) => {
+// Get a specific user by student id
+userRouter.get('/:id', async (req, res) => {
     try {
         console.log('getting user...');
 
-        const { email } = req.params;
-        const user = await getUser(email);
+        const { id } = req.params;
+        const user = await getUser(id);
         
         res.status(200).send({
             user,
@@ -27,13 +27,14 @@ userRouter.get('/:email', async (req, res) => {
     }
 })
 
+// Create a new user
 userRouter.post('/', async (req, res) => {
     try {
         console.log('creating user...');
 
-        const { email, password } = req.body;
+        const { id, password } = req.body;
 
-        const user = await createUser(email, password);
+        const user = await createUser(id, password);
 
         res.status(200).send({
             newUser: user,
@@ -43,13 +44,14 @@ userRouter.post('/', async (req, res) => {
     }
 })
 
+// Update a user's preferences
 userRouter.put('/', async (req, res) => {
     try {
         console.log('updating user...');
 
-        const { email, password } = req.body;
+        const { id, password } = req.body;
 
-        const user = await updateUser(email, password);
+        const user = await updateUser(id, password);
 
         res.status(200).send({
             updatedUser: user,
@@ -59,15 +61,16 @@ userRouter.put('/', async (req, res) => {
     }
 })
 
-userRouter.delete('/:email', async (req, res) => {
+// Delete a user by student id
+userRouter.delete('/:id', async (req, res) => {
     try {
         console.log('deleting user...');
 
-        const { email } = req.params;
+        const { id } = req.params;
 
-        await deleteUser(email);
+        await deleteUser(id);
 
-        res.status(200).send(`Deleted user with email: ${email}`);
+        res.status(200).send(`Deleted user with id: ${id}`);
     } catch (err) {
         res.status(500).send(err.message);
     }
