@@ -2,8 +2,10 @@
 const express = require('express');
 
 const {
-    getUserByEmail,
+    getUser,
     createUser,
+    updateUser,
+    deleteUser,
 } = require('../services/userService');
 
 const userRouter = express();
@@ -15,7 +17,7 @@ userRouter.get('/:email', async (req, res) => {
         console.log('getting user...');
 
         const { email } = req.params;
-        const user = await getUserByEmail(email);
+        const user = await getUser(email);
         
         res.status(200).send({
             user,
@@ -36,6 +38,36 @@ userRouter.post('/', async (req, res) => {
         res.status(200).send({
             newUser: user,
         });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+userRouter.put('/', async (req, res) => {
+    try {
+        console.log('updating user...');
+
+        const { email, password } = req.body;
+
+        const user = await updateUser(email, password);
+
+        res.status(200).send({
+            updatedUser: user,
+        });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+userRouter.delete('/:email', async (req, res) => {
+    try {
+        console.log('deleting user...');
+
+        const { email } = req.params;
+
+        await deleteUser(email);
+
+        res.status(200).send(`Deleted user with email: ${email}`);
     } catch (err) {
         res.status(500).send(err.message);
     }
