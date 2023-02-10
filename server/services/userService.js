@@ -1,10 +1,18 @@
 const getUserByEmail = (email) => {
     return {
-        email: email,
+        email,
         password: 'some password',
+    }
+}
+
+const createUser = (email, password) => {
+    return {
+        email,
+        password,
     }
 }
 
 module.exports = {
     getUserByEmail,
+    createUser,
 }
