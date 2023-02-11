@@ -76,4 +76,88 @@ userRouter.delete('/:id', async (req, res) => {
     }
 })
 
+// ~~~~~~~~~~~~~ DON'T TEST ANY ROUTES BELOW ~~~~~~~~~~~~~
+
+// Add a new trip to a user's past trips
+// TODO: Check if there's a unique id tied to each place in yelp api
+userRouter.post('/pastTrips', async (req, res) => {
+    try {
+        console.log('adding trip to past trips...');
+
+        const { name, rating } = req.body;
+
+        const user = await updateUser(id, placeCategory);
+
+        res.status(200).send({
+            updatedUser: user,
+        });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+// Update a trip from a user's past trips
+userRouter.put('/pastTrips', async (req, res) => {
+    try {
+        console.log('updating trip from past trips...');
+
+        const { name, rating } = req.body;
+
+        await deleteUser(id);
+
+        res.status(200).send(`Deleted user with id: ${id}`);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+// Add a new trip to a user's saved trips
+userRouter.post('/savedTrips', async (req, res) => {
+    try {
+        console.log('adding trip to saved trips...');
+
+        const { id } = req.body;
+
+        const user = await updateUser(id, placeCategory);
+
+        res.status(200).send({
+            updatedUser: user,
+        });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+// Update a trip from a user's saved trips
+userRouter.put('/savedTrips', async (req, res) => {
+    try {
+        console.log('updating trip from saved trips...');
+
+        const { name, rating } = req.body;
+
+        await deleteUser(id);
+
+        res.status(200).send({
+            updatedUser: user,
+        });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+// Remove a trip from a user's saved trips
+userRouter.delete('/savedTrips', async (req, res) => {
+    try {
+        console.log('deleting trip from saved trips...');
+
+        const { id } = req.params;
+
+        const user = await updateUser(id, placeCategory);
+
+        res.status(200).send(`Deleted user with id: ${id}`);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
 module.exports = userRouter;
