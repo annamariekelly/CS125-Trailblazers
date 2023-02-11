@@ -84,61 +84,65 @@ userRouter.post('/pastTrips', async (req, res) => {
     try {
         console.log('adding trip to past trips...');
 
-        const { name, rating } = req.body;
+        const { userId, businessId, rating } = req.body;
 
         const user = await updateUser(id, placeCategory);
 
         res.status(200).send({
-            updatedUser: user,
+            newPastTrip: user,
         });
     } catch (err) {
         res.status(500).send(err.message);
     }
 })
 
-// Update a trip from a user's past trips
+// Update a trip from a user's past trips (for our use case, just to update rating)
 userRouter.put('/pastTrips', async (req, res) => {
     try {
         console.log('updating trip from past trips...');
 
-        const { name, rating } = req.body;
-
-        await deleteUser(id);
-
-        res.status(200).send(`Deleted user with id: ${id}`);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-})
-
-// Add a new trip to a user's saved trips
-userRouter.post('/savedTrips', async (req, res) => {
-    try {
-        console.log('adding trip to saved trips...');
-
-        const { id } = req.body;
+        const { userId, businessId, rating } = req.body;
 
         const user = await updateUser(id, placeCategory);
 
         res.status(200).send({
-            updatedUser: user,
+            updatedPastTrip: user,
         });
     } catch (err) {
         res.status(500).send(err.message);
     }
 })
 
-// Update a trip from a user's saved trips
+// Add a new trip to a user's saved trips.
+// Note that this can also be a part of past trips.
+userRouter.post('/savedTrips', async (req, res) => {
+    try {
+        console.log('adding trip to saved trips...');
+
+        const { userId, businessId, rating } = req.body;
+
+        const user = await updateUser(id, placeCategory);
+
+        res.status(200).send({
+            updatedSavedTrip: user,
+        });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+// Update a trip from a user's saved trips (for our use case, just to update rating)
+// Note that this can also be a part of past trips.
 userRouter.put('/savedTrips', async (req, res) => {
     try {
         console.log('updating trip from saved trips...');
 
-        const { name, rating } = req.body;
+        const { userId, businessId, rating } = req.body;
 
-        await deleteUser(id);
+        const user = await updateUser(id, placeCategory);
 
         res.status(200).send({
-            updatedUser: user,
+            updatedSavedTrip: user,
         });
     } catch (err) {
         res.status(500).send(err.message);
@@ -146,15 +150,16 @@ userRouter.put('/savedTrips', async (req, res) => {
 })
 
 // Remove a trip from a user's saved trips
+// Note that this can also be a part of past trips.
 userRouter.delete('/savedTrips', async (req, res) => {
     try {
         console.log('deleting trip from saved trips...');
 
-        const { id } = req.params;
+        const { userId, businessId } = req.params;
 
         const user = await updateUser(id, placeCategory);
 
-        res.status(200).send(`Deleted user with id: ${id}`);
+        res.status(200).send(`Deleted saved trip for user (${userId}) with business id: ${businessId}`);
     } catch (err) {
         res.status(500).send(err.message);
     }
