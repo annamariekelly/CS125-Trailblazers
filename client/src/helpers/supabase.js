@@ -62,6 +62,15 @@ export const deleteUser = async (student_id) => {
     }
 }
 
+// Gets all trips for all users. Works for past and saved trips.
+export const getAllTrips = async (trip_type) => {
+    const { data, error } = await supabase
+        .from(`${trip_type}_Trips`)
+        .select();
+
+    return {data, error};
+}
+
 // Gets all trips for a user. Works for past and saved trips.
 export const getTrips = async (trip_type, student_id) => {
     const { data, error } = await supabase
@@ -73,14 +82,40 @@ export const getTrips = async (trip_type, student_id) => {
 }
 
 // Adds a trip for a user. Works for past and saved trips.
-export const addTrip = async (trip_type, student_id, business_id, rating) => {
+export const addTrip = async (trip_type, student_id, business_id, rating = null) => {
     const { error } = await supabase
         .from(`${trip_type}_Trips`)
         .insert({
             student_id,
-            trip_id: business_id,
+            business_id: business_id,
             rating,
         });
+
+    if (error) {
+        return error;
+    }
+}
+
+// Updates a trip for a user (mainly rating). Works for past and saved trips.
+export const updateTrip = async (trip_type, student_id, business_id, rating = null) => {
+    const { error } = await supabase
+        .from(`${trip_type}_Trips`)
+        .update({rating})
+        .eq('student_id', student_id)
+        .eq('business_id', business_id);
+
+    if (error) {
+        return error;
+    }
+}
+
+// Adds a trip for a user. Works for past and saved trips.
+export const deleteTrip = async (trip_type, student_id, business_id) => {
+    const { error } = await supabase
+        .from(`${trip_type}_Trips`)
+        .delete()
+        .eq('student_id', student_id)
+        .eq('business_id', business_id);
 
     if (error) {
         return error;

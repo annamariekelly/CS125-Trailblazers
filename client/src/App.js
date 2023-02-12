@@ -9,8 +9,11 @@ import {
   createUser,
   updateUser,
   deleteUser,
+  getAllTrips,
   getTrips,
   addTrip,
+  updateTrip,
+  deleteTrip,
 } from "./helpers/supabase";
 
 function App() {
@@ -61,25 +64,47 @@ function App() {
         }
       });
 
+    getAllTrips('Past').then(({data, error}) => {
+        if (data) {
+          console.log('get all past trips for all users: ', data);
+        } else {
+          console.log('get all past trips for all users error: ', error.message);
+        }
+      });
+
     getTrips('Past', 43798917).then(({data, error}) => {
         if (data) {
-          console.log('all past trips: ', data);
+          console.log('get all past trips: ', data);
         } else {
-          console.log('past trips error: ', error.message);
+          console.log('get all past trips error: ', error.message);
         }
       });
 
     addTrip('Past', 43798917, 2, 4)
       .then((err) => {
         if (err) {
-          console.log('past trip error: ', err.message);
+          console.log('add past trip error: ', err.message);
         }
       });
 
     addTrip('Past', 43798917, 1, 4)
       .then((err) => {
         if (err) {
-          console.log('past trip error: ', err.message);
+          console.log('add past trip error: ', err.message);
+        }
+      });
+
+    updateTrip('Past', 43798917, 1, 3)
+      .then((err) => {
+        if (err) {
+          console.log('update past trip error: ', err.message);
+        }
+      });
+
+    deleteTrip('Past', 43798917, 1)
+      .then((err) => {
+        if (err) {
+          console.log('delete past trip error: ', err.message);
         }
       });
 
