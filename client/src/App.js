@@ -3,7 +3,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import { fetchUser } from "./helpers/supabase";
+import { fetchUser, createUser } from "./helpers/supabase";
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -14,7 +14,21 @@ function App() {
     //     .then((data) => setData(data.message));
 
     fetchUser(43798917)
-        .then((data) => setData(data[0].student_id));
+        .then((data) => {
+          if (data) {
+            setData(data[0].student_id);
+          } else {
+            console.log('fetch user error: ', data.message);
+          }
+        });
+
+    createUser(7654321, 'Anna password', 'gym')
+        .then((err) => {
+          if (err) {
+            console.log('create user error: ', err.message);
+          }
+        });
+
   }, []);
 
   return (
