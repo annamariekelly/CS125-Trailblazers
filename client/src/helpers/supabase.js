@@ -97,7 +97,7 @@ export const addTrip = async (trip_type, student_id, business_id, rating = null)
 }
 
 // Updates a trip for a user (mainly rating). Works for past and saved trips.
-export const updateTrip = async (trip_type, student_id, business_id, rating = null) => {
+export const updateTrip = async (trip_type, student_id, business_id, rating) => {
     const { error } = await supabase
         .from(`${trip_type}_Trips`)
         .update({rating})
