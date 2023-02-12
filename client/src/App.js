@@ -3,7 +3,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import { fetchUser, createUser } from "./helpers/supabase";
+import { fetchUser, createUser, updateUser } from "./helpers/supabase";
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -13,7 +13,7 @@ function App() {
     //     .then((res) => res.json())
     //     .then((data) => setData(data.message));
 
-    fetchUser(43798917)
+    fetchUser(7654321)
         .then((data) => {
           if (data) {
             setData(data[0].student_id);
@@ -26,6 +26,13 @@ function App() {
         .then((err) => {
           if (err) {
             console.log('create user error: ', err.message);
+          }
+        });
+
+    updateUser(7654321, 'park')
+        .then((err) => {
+          if (err) {
+            console.log('update user error: ', err.message);
           }
         });
 

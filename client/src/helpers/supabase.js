@@ -35,5 +35,16 @@ export const createUser = async (student_id, password, place_category) => {
     if (error) {
         return error;
     }
+}
 
+// Updates specified user.
+export const updateUser = async (student_id, place_category) => {  
+    const { error } = await supabase
+        .from('User')
+        .update({ place_category })
+        .eq('student_id', student_id);
+
+    if (error) {
+        return error;
+    }
 }
