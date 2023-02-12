@@ -48,3 +48,15 @@ export const updateUser = async (student_id, place_category) => {
         return error;
     }
 }
+
+// Deletes specified user.
+export const deleteUser = async (student_id) => {  
+    const { error } = await supabase
+        .from('User')
+        .delete()
+        .eq('student_id', student_id);
+
+    if (error) {
+        return error;
+    }
+}

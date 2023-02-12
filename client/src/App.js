@@ -3,7 +3,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import { fetchUser, createUser, updateUser } from "./helpers/supabase";
+import { fetchUser, createUser, updateUser, deleteUser } from "./helpers/supabase";
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -36,6 +36,13 @@ function App() {
           }
         });
 
+    deleteUser(7654321, 'park')
+        .then((err) => {
+          if (err) {
+            console.log('delete user error: ', err.message);
+          }
+        });
+
   }, []);
 
   return (
@@ -43,6 +50,19 @@ function App() {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>{!data ? "Loading..." : data}</p>
+          <button onClick={() => {
+            fetchUser(7654321)
+              .then((data) => {
+                if (data) {
+                  setData(data[0].student_id);
+                } else {
+                  console.log('fetch user error: ', data.message);
+                }
+              });
+          }}>Create</button>
+          <button>Read</button>
+          <button>Update</button>
+          <button>Delete</button>
         </header>
       </div>
   );
