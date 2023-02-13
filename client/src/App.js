@@ -115,19 +115,6 @@ function App() {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>{!data ? "Loading..." : data}</p>
-          <button onClick={() => {
-            fetchUser(7654321)
-              .then((data) => {
-                if (data) {
-                  setData(data[0].student_id);
-                } else {
-                  console.log('fetch user error: ', data.message);
-                }
-              });
-          }}>Create</button>
-          <button>Read</button>
-          <button>Update</button>
-          <button>Delete</button>
         </header>
       </div>
   );
