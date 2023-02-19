@@ -3,9 +3,16 @@ import React from "react";
 const LoginPage = () => {
 
     return (
-        <h1>
-            Login Page
-        </h1>
+        <div>
+            <h1>
+                Login Page
+            </h1>
+            <a href="/">
+                <button>
+                    Back
+                </button>
+            </a>
+        </div>
     );
 };
 
