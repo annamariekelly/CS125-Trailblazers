@@ -5,9 +5,10 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
+import StartPage from "./pages/StartPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import HomePage from './pages/HomePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,9 +16,10 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          <Route index element={<HomePage />} />
+          <Route index element={<StartPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="home" element={<HomePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

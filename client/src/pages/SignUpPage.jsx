@@ -6,42 +6,83 @@ const SignUpForm = () => {
     const [name, setName] = useState('');
     const [studentId, setStudentId] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [placeCategory, setPlaceCategory] = useState('');
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const handleShowPassword = (event) => {
+        event.preventDefault();
+        setShowPassword(!showPassword);
+    }
+
+    const handleShowConfirmPassword = (event) => {
+        event.preventDefault();
+        setShowConfirmPassword(!showConfirmPassword);
+    }
 
     const handleSignUpSubmit = (event) => {
         event.preventDefault();
-        alert(`Name: ${name}; Student ID: ${studentId}; Password: ${password}; Place Category: ${placeCategory}`);
+        alert(`Name: ${name}; Student ID: ${studentId}; Password: ${password}; Confirm Password: ${confirmPassword}; Place Category: ${placeCategory}`);
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
         createUser(studentId, name, password, placeCategory)
             .then((err) => {
                 if (err) {
                 console.log('create user error: ', err.message);
                 }
             });
-    }
+    };
 
     return (
         <form onSubmit={handleSignUpSubmit}>
-          <label>Name:
-            <input 
-              type="text" 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <label>Student ID:
-            <input 
-              type="text" 
-              value={studentId}
-              onChange={(e) => setStudentId(e.target.value)}
-            />
-          </label>
-          <label>Password:
-            <input 
-              type="text" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+          <div>
+            <label>Name:
+                <input 
+                type="text" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                />
+            </label>
+          </div>
+          <div>
+            <label>Student ID:
+                <input 
+                type="text" 
+                value={studentId}
+                onChange={(e) => setStudentId(e.target.value)}
+                />
+            </label>
+          </div>
+          <div>
+            <label>Password:
+                <input 
+                type={showPassword ? "text" : "password"} 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                />
+            </label>
+            <button onClick={handleShowPassword}>
+                Show
+            </button>
+          </div>
+          <div>
+            <label>Confirm Password:
+                <input 
+                type={showConfirmPassword ? "text" : "password"} 
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+            </label>
+            <button onClick={handleShowConfirmPassword}>
+                Show
+            </button>
+          </div>
           <div>
             Terrain:
             <label>
@@ -83,8 +124,8 @@ const SignUpForm = () => {
           </div>
           <input type="submit" />
         </form>
-      )
-}
+      );
+};
 
 const SignUpPage = () => {
 

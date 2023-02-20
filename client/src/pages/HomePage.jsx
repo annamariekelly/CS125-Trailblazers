@@ -7,14 +7,9 @@ const HomePage = () => {
             <h1>
                 Home Page
             </h1>
-            <a href="/signup">
+            <a href="/">
                 <button>
-                    Sign Up
-                </button>
-            </a>
-            <a href="/login">
-                <button>
-                    Log In
+                    Back
                 </button>
             </a>
         </div>
