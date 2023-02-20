@@ -28,10 +28,10 @@ export const fetchUser = async (student_id) => {
 }
 
 // Creates a new user.
-export const createUser = async (student_id, password, place_category) => {  
+export const createUser = async (student_id, name, password, place_category) => {  
     const { error } = await supabase
         .from('User')
-        .insert({ student_id, password, place_category });
+        .insert({ student_id, name, password, place_category });
 
     if (error) {
         return error;
