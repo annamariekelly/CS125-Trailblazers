@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { fetchUser } from "../helpers/supabase";
 
 const LoginForm = () => {
+    const navigate = useNavigate(); // Used to explicitly navigate to routes/pages
+
     const [studentId, setStudentId] = useState('');
     const [password, setPassword] = useState('');
 
@@ -22,14 +25,17 @@ const LoginForm = () => {
                 if (data) {
                     console.log('one user: ', data);
 
-                    if (data.length === 0) {
+                    if (data.length === 0) { // ID doesn't exist in db
                         alert(`Login unsuccessful: No User with ID ${studentId} found!`);
-                    } else if (data[0].password === password) {
+                    }
+                    else if (data[0].password === password) { // Login success (right password)
                         alert('Login successful!');
-                    } else {
+                        navigate('/home');
+                    }
+                    else { // Wrong password
                         alert('Login unsuccessful: Wrong Password!');
                     }
-                } else {
+                } else { // Catches any db error
                     console.log(`fetch user error: ${error.message}`);
                     alert(`Login unsuccessful (database error): ${error.message}`);
                 }
