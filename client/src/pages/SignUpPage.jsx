@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { createUser } from "../helpers/supabase";
 
 const SignUpForm = () => {
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [studentId, setStudentId] = useState('');
     const [password, setPassword] = useState('');
@@ -34,7 +37,11 @@ const SignUpForm = () => {
         createUser(studentId, name, password, placeCategory)
             .then((err) => {
                 if (err) {
-                console.log('create user error: ', err.message);
+                    console.log('create user error: ', err.message);
+                    alert(`Sign Up Unsuccessful (database error): ${err.message}`);
+                } else {
+                    alert('Sign Up Successful!');
+                    navigate('/home');
                 }
             });
     };
