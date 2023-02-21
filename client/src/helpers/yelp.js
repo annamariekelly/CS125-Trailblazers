@@ -15,10 +15,10 @@ const DEFAULT_PARAMS = {
     term: 'snack',
     radius: 16000,  // in METERS
     sort_by: 'best_match',
-    limit: 7,
+    limit: 5,
 };
 
-function parseParams(params={}) {
+export function parseParams(params={}) {
     const location = params.location || DEFAULT_PARAMS.location;
     const term = params.term || DEFAULT_PARAMS.term;
     const radius = parseInt(params.radius) || DEFAULT_PARAMS.radius;
@@ -28,11 +28,16 @@ function parseParams(params={}) {
     return baseURL + `location=${location}&term=${term}&radius=${parseInt(radius)}&sort_by=${sort_by}&limit=${parseInt(limit)}`;
 }
 
-function searchYelp(query) {
-    fetch(query, options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err));
+function queryYelp(query) {
+    return fetch(query, options)
+        .then(response => response.json())
+        .catch(err => console.error(err));
+}
+
+export function searchYelp(query) {
+    return queryYelp(query)
+        .then(response => response.businesses)
+        .catch(err => console.error(err));
 }
 
 // Testing
