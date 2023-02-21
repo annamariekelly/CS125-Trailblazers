@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.7.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.0",
+    "yelp-api": "^1.0.3"
   }
 }
