@@ -30,7 +30,7 @@ const LoginForm = () => {
                     }
                     else if (data[0].password === password) { // Login success (right password)
                         alert('Login successful!');
-                        navigate('/home');
+                        navigate('/home', { state: { student_id: studentId } });
                     }
                     else { // Wrong password
                         alert('Login unsuccessful: Wrong Password!');
@@ -47,18 +47,20 @@ const LoginForm = () => {
           <div>
             <label>Student ID:
                 <input 
-                type="text" 
-                value={studentId}
-                onChange={(e) => setStudentId(e.target.value)}
+                    type="text" 
+                    value={studentId}
+                    onChange={(e) => setStudentId(e.target.value)}
+                    required
                 />
             </label>
           </div>
           <div>
             <label>Password:
                 <input 
-                type={showPassword ? "text" : "password"} 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                    type={showPassword ? "text" : "password"} 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
             </label>
             <button onClick={handleShowPassword}>
