@@ -41,7 +41,7 @@ const SignUpForm = () => {
                     alert(`Sign Up Unsuccessful (database error): ${err.message}`);
                 } else {
                     alert('Sign Up Successful!');
-                    navigate('/home');
+                    navigate('/home', { state: { student_id: studentId } });
                 }
             });
     };

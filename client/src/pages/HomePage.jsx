@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import PropTypes from 'prop-types';
+import { useLocation } from "react-router-dom";
 
 import { fetchUser } from "../helpers/supabase";
 
-const HomePage = ({ student_id }) => {
+const HomePage = () => {
+    const location = useLocation();
+    const { student_id } = location.state;
     
     useEffect(() => {
         fetchUser(student_id)
@@ -21,6 +23,9 @@ const HomePage = ({ student_id }) => {
             <h1>
                 Home Page
             </h1>
+            <p>
+                Logged in user: {student_id}
+            </p>
             <a href="/">
                 <button>
                     Back
@@ -28,14 +33,6 @@ const HomePage = ({ student_id }) => {
             </a>
         </div>
     );
-};
-
-HomePage.defaultProps = {
-    student_id: 0,
-};
-
-HomePage.propTypes = {
-    student_id: PropTypes.number,
 };
 
 export default HomePage;
