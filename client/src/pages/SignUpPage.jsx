@@ -27,7 +27,7 @@ const SignUpForm = () => {
 
     const handleSignUpSubmit = (event) => {
         event.preventDefault();
-        alert(`Name: ${name}; Student ID: ${studentId}; Password: ${password}; Confirm Password: ${confirmPassword}; Place Category: ${placeCategory}`);
+        console.log(`Name: ${name}; Student ID: ${studentId}; Password: ${password}; Confirm Password: ${confirmPassword}; Place Category: ${placeCategory}`);
 
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
@@ -38,10 +38,19 @@ const SignUpForm = () => {
             .then((err) => {
                 if (err) {
                     console.log('create user error: ', err.message);
-                    alert(`Sign Up Unsuccessful (database error): ${err.message}`);
+
+                    if (err.message === 'duplicate key value violates unique constraint "User_pkey"') {
+                        alert(`Sign Up Unsuccessful: User with student id ${studentId} already exists!`)
+                    }
+                    else if (err.message.includes('invalid input syntax for type bigint')) {
+                        alert('Sign Up Unsuccessful: Student ID must be a number!');
+                    }
+                    else {
+                        alert(`Sign Up Unsuccessful (database error): ${err.message}`);
+                    }
                 } else {
                     alert('Sign Up Successful!');
-                    navigate('/home');
+                    navigate('/home', { state: { student_id: studentId } }); // Navigates to and passes the student id to the home page
                 }
             });
     };
@@ -51,27 +60,30 @@ const SignUpForm = () => {
           <div>
             <label>Name:
                 <input 
-                type="text" 
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                    type="text" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                 />
             </label>
           </div>
           <div>
             <label>Student ID:
                 <input 
-                type="text" 
-                value={studentId}
-                onChange={(e) => setStudentId(e.target.value)}
+                    type="text" 
+                    value={studentId}
+                    onChange={(e) => setStudentId(e.target.value)}
+                    required
                 />
             </label>
           </div>
           <div>
             <label>Password:
                 <input 
-                type={showPassword ? "text" : "password"} 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                    type={showPassword ? "text" : "password"} 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
             </label>
             <button onClick={handleShowPassword}>
@@ -81,9 +93,10 @@ const SignUpForm = () => {
           <div>
             <label>Confirm Password:
                 <input 
-                type={showConfirmPassword ? "text" : "password"} 
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                    type={showConfirmPassword ? "text" : "password"} 
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
                 />
             </label>
             <button onClick={handleShowConfirmPassword}>
@@ -94,37 +107,38 @@ const SignUpForm = () => {
             Terrain:
             <label>
                 <input 
-                type="radio" 
-                value="Foodie Finds"
-                checked={placeCategory === "Foodie Finds"}
-                onChange={(e) => setPlaceCategory(e.target.value)}
+                    type="radio" 
+                    value="Foodie Finds"
+                    checked={placeCategory === "Foodie Finds"}
+                    onChange={(e) => setPlaceCategory(e.target.value)}
+                    required
                 />
                 Foodie Finds
             </label>
             <label>
                 <input 
-                type="radio" 
-                value="Nature Navigators"
-                checked={placeCategory === "Nature Navigators"}
-                onChange={(e) => setPlaceCategory(e.target.value)}
+                    type="radio" 
+                    value="Nature Navigators"
+                    checked={placeCategory === "Nature Navigators"}
+                    onChange={(e) => setPlaceCategory(e.target.value)}
                 />
                 Nature Navigators
             </label>
             <label>
                 <input 
-                type="radio" 
-                value="Adventure Seekers"
-                checked={placeCategory === "Adventure Seekers"}
-                onChange={(e) => setPlaceCategory(e.target.value)}
+                    type="radio" 
+                    value="Adventure Seekers"
+                    checked={placeCategory === "Adventure Seekers"}
+                    onChange={(e) => setPlaceCategory(e.target.value)}
                 />
                 Adventure Seekers
             </label>
             <label>
                 <input 
-                type="radio" 
-                value="Metropolis Marvels"
-                checked={placeCategory === "Metropolis Marvels"}
-                onChange={(e) => setPlaceCategory(e.target.value)}
+                    type="radio" 
+                    value="Metropolis Marvels"
+                    checked={placeCategory === "Metropolis Marvels"}
+                    onChange={(e) => setPlaceCategory(e.target.value)}
                 />
                 Metropolis Marvels
             </label>

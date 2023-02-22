@@ -18,7 +18,7 @@ const LoginForm = () => {
 
     const handleLoginSubmit = (event) => {
         event.preventDefault();
-        alert(`Student ID: ${studentId}; Password: ${password}`);
+        console.log(`Student ID: ${studentId}; Password: ${password}`);
 
         fetchUser(studentId)
             .then(({data, error}) => {
@@ -30,7 +30,7 @@ const LoginForm = () => {
                     }
                     else if (data[0].password === password) { // Login success (right password)
                         alert('Login successful!');
-                        navigate('/home');
+                        navigate('/home', { state: { student_id: studentId } }); // Navigates to and passes the student id to the home page
                     }
                     else { // Wrong password
                         alert('Login unsuccessful: Wrong Password!');
@@ -47,18 +47,20 @@ const LoginForm = () => {
           <div>
             <label>Student ID:
                 <input 
-                type="text" 
-                value={studentId}
-                onChange={(e) => setStudentId(e.target.value)}
+                    type="text" 
+                    value={studentId}
+                    onChange={(e) => setStudentId(e.target.value)}
+                    required
                 />
             </label>
           </div>
           <div>
             <label>Password:
                 <input 
-                type={showPassword ? "text" : "password"} 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                    type={showPassword ? "text" : "password"} 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
             </label>
             <button onClick={handleShowPassword}>
@@ -82,7 +84,7 @@ const LoginPage = () => {
                     Back
                 </button>
             </a>
-            {LoginForm()}
+            {LoginForm()} 
         </div>
     );
 };
