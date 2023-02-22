@@ -84,7 +84,7 @@ const LoginPage = () => {
                     Back
                 </button>
             </a>
-            {LoginForm()}
+            {LoginForm()} 
         </div>
     );
 };
