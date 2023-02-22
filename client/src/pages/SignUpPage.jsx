@@ -27,7 +27,7 @@ const SignUpForm = () => {
 
     const handleSignUpSubmit = (event) => {
         event.preventDefault();
-        alert(`Name: ${name}; Student ID: ${studentId}; Password: ${password}; Confirm Password: ${confirmPassword}; Place Category: ${placeCategory}`);
+        console.log(`Name: ${name}; Student ID: ${studentId}; Password: ${password}; Confirm Password: ${confirmPassword}; Place Category: ${placeCategory}`);
 
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
@@ -36,12 +36,21 @@ const SignUpForm = () => {
 
         createUser(studentId, name, password, placeCategory)
             .then((err) => {
-                if (err) { // TODO: Catch specifically creating duplicate student id
+                if (err) {
                     console.log('create user error: ', err.message);
-                    alert(`Sign Up Unsuccessful (database error): ${err.message}`);
+
+                    if (err.message === 'duplicate key value violates unique constraint "User_pkey"') {
+                        alert(`Sign Up Unsuccessful: User with student id ${studentId} already exists!`)
+                    }
+                    else if (err.message.includes('invalid input syntax for type bigint')) {
+                        alert('Sign Up Unsuccessful: Student ID must be a number!');
+                    }
+                    else {
+                        alert(`Sign Up Unsuccessful (database error): ${err.message}`);
+                    }
                 } else {
                     alert('Sign Up Successful!');
-                    navigate('/home', { state: { student_id: studentId } });
+                    navigate('/home', { state: { student_id: studentId } }); // Navigates to and passes the student id to the home page
                 }
             });
     };

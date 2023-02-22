@@ -18,7 +18,7 @@ const LoginForm = () => {
 
     const handleLoginSubmit = (event) => {
         event.preventDefault();
-        alert(`Student ID: ${studentId}; Password: ${password}`);
+        console.log(`Student ID: ${studentId}; Password: ${password}`);
 
         fetchUser(studentId)
             .then(({data, error}) => {
@@ -30,7 +30,7 @@ const LoginForm = () => {
                     }
                     else if (data[0].password === password) { // Login success (right password)
                         alert('Login successful!');
-                        navigate('/home', { state: { student_id: studentId } });
+                        navigate('/home', { state: { student_id: studentId } }); // Navigates to and passes the student id to the home page
                     }
                     else { // Wrong password
                         alert('Login unsuccessful: Wrong Password!');
