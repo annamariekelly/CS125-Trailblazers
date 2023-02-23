@@ -34,21 +34,25 @@ const SORT_METHODS = {
 
 /**
  * Get Yelp search results for a specific category.
+ * @param {String} current_location - An address string representing the current location of the user.
  * @param {number} category_index - The index representing the corresponding category to search.
- * @returns {Promise<Array>} - A promise that resolves to an array of Yelp search results.
+ * @param {number} search_radius - The maximum radius from current_location a user is willing to go.
+ * @param {number} limit (OPTIONAL) - The number of searches we wish to retrieve from yelp, per search term.
+* @returns {Promise<Array>} - A promise that resolves to an array of Yelp search results.
  */
- export async function findResults(category_index) {
+ export async function findResults(current_location, category_index,  search_radius, limit=3) {
     // Log the current category being searched.
     console.log(`Getting results for ${CATEGORIES[category_index].name}`);
   
     // Map over the search terms for the current category and create a promise for each.
     const promises = CATEGORIES[category_index].search_terms.map(term => {
       // Construct the search query for the current term.
-      // TODO: INCLUDE location to search (and maybe radius?)
-      const query = {
-        term: term,
-        limit: 3,
-      };
+        const query = {
+            location: current_location,
+            term: term,
+            radius: search_radius,
+            limit: limit,
+        };
   
       // Execute the search and return the resulting promise.
       return searchYelp(parseParams(query));
@@ -90,8 +94,4 @@ export function sortResults(results, sort_by = "r") {
         console.log(`${result.name}\nrating: ${result.rating}\nprice: ${result.price}\ncoordinates: (${result.coordinates.latitude}, ${result.coordinates.longitude})\n`);
     }
 }
-  
-// TESTING
-const results = await findResults(0);
-getResultInfo(results);
-console.log(sortResults(results));
+

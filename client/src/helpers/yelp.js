@@ -11,7 +11,7 @@ const options = {
 };
 
 const DEFAULT_PARAMS = {
-    location: 'Irvine',
+    location: '3641 Baylor Street, Irvine, CA',
     term: 'snack',
     radius: 16000,  // in METERS
     sort_by: 'best_match',
