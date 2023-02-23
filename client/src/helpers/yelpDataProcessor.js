@@ -37,7 +37,7 @@ const SORT_METHODS = {
  * @param {number} category_index - The index representing the corresponding category to search.
  * @returns {Promise<Array>} - A promise that resolves to an array of Yelp search results.
  */
- async function findResults(category_index) {
+ export async function findResults(category_index) {
     // Log the current category being searched.
     console.log(`Getting results for ${CATEGORIES[category_index].name}`);
   
@@ -67,7 +67,7 @@ const SORT_METHODS = {
  * @param {String} sort_by - The letter code representing the sorting method (default is "r")
  * @returns {Array} - The sorted array of Yelp search results
 */
-function sortResults(results, sort_by = "r") {
+export function sortResults(results, sort_by = "r") {
     // Get the Yelp term corresponding to the specified sorting method
     const sortTerm = SORT_METHODS[sort_by];
 
@@ -81,9 +81,9 @@ function sortResults(results, sort_by = "r") {
   
     
 /**
- * keeping this to demonstarte how to iterate/extract info from results
+ * keeping this to demonstrate how to iterate/extract info from results
  */
-function getResultInfo(results) {
+ export function getResultInfo(results) {
     // loop through each array within results
     for (const result of results) {
     // log the name and rating of the restaurant
