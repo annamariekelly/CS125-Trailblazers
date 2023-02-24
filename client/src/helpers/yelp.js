@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-const baseURL = 'https://api.yelp.com/v3/businesses/search?';
+const baseURL = 'https://api.yelp.com/v3/businesses/';
   
 const options = {
     method: 'GET',
@@ -18,14 +18,14 @@ const DEFAULT_PARAMS = {
     limit: 5,
 };
 
-export function parseParams(params={}) {
+export function parseSearchParams(params={}) {
     const location = params.location || DEFAULT_PARAMS.location;
     const term = params.term || DEFAULT_PARAMS.term;
     const radius = parseInt(params.radius) || DEFAULT_PARAMS.radius;
     const sort_by = params.sort_by || DEFAULT_PARAMS.sort_by;
     const limit = parseInt(params.limit) || DEFAULT_PARAMS.limit;
 
-    return baseURL + `location=${location}&term=${term}&radius=${parseInt(radius)}&sort_by=${sort_by}&limit=${parseInt(limit)}`;
+    return baseURL + `search?location=${location}&term=${term}&radius=${parseInt(radius)}&sort_by=${sort_by}&limit=${parseInt(limit)}`;
 }
 
 function queryYelp(query) {
@@ -40,5 +40,14 @@ export function searchYelp(query) {
         .catch(err => console.error(err));
 }
 
+export function getBusinessInfo(businesses_id) {
+    const query = `${baseURL}${businesses_id}`;
+    return fetch(query, options)
+        .then(response => response.json())
+        .then(json => json)
+        .catch(error => console.error(error));
+}
+
 // Testing
-searchYelp(parseParams());
+console.log(await searchYelp(parseSearchParams()));
+console.log(await getBusinessInfo('o6ziktvJIlqumDpggkS-dQ'))
