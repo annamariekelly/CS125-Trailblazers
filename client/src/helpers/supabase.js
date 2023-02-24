@@ -51,7 +51,7 @@ export const updateUser = async (student_id, place_category) => {
 }
 
 // Deletes specified user.
-export const deleteUser = async (student_id) => {  
+export const deleteUser = async (student_id) => {  // TODO: Also delete from past and saved trips
     const { error } = await supabase
         .from('User')
         .delete()
