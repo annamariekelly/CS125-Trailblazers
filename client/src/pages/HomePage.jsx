@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { fetchUser } from "../helpers/supabase";
 
 const HomePage = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const { student_id } = location.state;
     
@@ -18,6 +20,12 @@ const HomePage = () => {
             });
     }, []);
 
+    const navToProfile = (event) => {
+        event.preventDefault();
+        // console.log(`Student ID: ${student_id}`);
+        navigate('/profile', { state: { student_id: student_id } }); // Navigates to and passes the student id to the profile page
+    };
+
     return (
         <div>
             <h1>
@@ -31,6 +39,9 @@ const HomePage = () => {
                     Back
                 </button>
             </a>
+            <button onClick={navToProfile}>
+                Profile
+            </button>
         </div>
     );
 };
