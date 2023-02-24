@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { fetchUser } from "../helpers/supabase";
+import { fetchUser } from "../database/supabase";
 
 const HomePage = () => {
     const navigate = useNavigate();
