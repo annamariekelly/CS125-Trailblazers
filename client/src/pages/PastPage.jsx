@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import TripCard from "../components/TripCard";
 
-// import { fetchUser } from "../helpers/supabase";
+// import { fetchUser } from "../database/supabase";
 
 const PastPage = () => {
     const navigate = useNavigate();
