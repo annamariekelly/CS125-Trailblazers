@@ -55,7 +55,7 @@ const SORT_METHODS = {
         };
   
       // Execute the search and return the resulting promise.
-      return searchYelp(parseParams(query));
+      return searchYelp(parseSearchParams(query));
     });
   
     // Wait for all of the promises to resolve, and return the results as an array.
