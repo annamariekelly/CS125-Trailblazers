@@ -48,21 +48,21 @@ function calcSearchRadius(maxTime, intensity= 0){
  * @returns {Array} Returns trimmed results list
  */
 function trimResults(results){
-    //console.log(results);
-    function Location(id, name, image_url, url, distance, rating){
+    function Location(id, name, image_url, street, city, url, distance, rating){
         this.id = id;
         this.name = name;
         this.image_url = image_url;
+        this.street = street;
+        this.city = city;
         this.url = url;
         this.distance = distance;
         this.rating = rating;
     }
     let trimmedResults = []
     for (const result of results){
-        //console.log(result);
         if (calcChance(result)){
             trimmedResults.push(new Location(result.id, result.name, result.image_url,
-                result.url, result.distance, result.rating));
+                result.location.address1, result.location.city, result.url, result.distance, result.rating));
         }
     }
     return trimmedResults
