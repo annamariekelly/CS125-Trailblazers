@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { createUser } from "../helpers/supabase";
+import { createUser } from "../database/supabase";
 
 const SignUpForm = () => {
     const navigate = useNavigate();

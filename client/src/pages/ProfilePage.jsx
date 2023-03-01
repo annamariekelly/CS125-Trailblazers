@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { fetchUser, updateUser } from "../helpers/supabase";
+import { fetchUser, updateUser } from "../database/supabase";
 
 const ProfileInfo = (student_id) => {
     const [name, setName] = useState('');
@@ -31,7 +31,7 @@ const ProfileInfo = (student_id) => {
 
     const updateTerrain = (event) => {
         event.preventDefault();
-        console.log(`Updating Student ID: ${student_id} to ${placeCategory}`);
+        alert(`Updating Student ID: ${student_id} to ${placeCategory}`);
         
         updateUser(student_id, placeCategory)
             .then((err) => {
@@ -113,27 +113,23 @@ const ProfilePage = () => {
     const location = useLocation();
     const { student_id } = location.state;
 
-    const navToHome = (event) => {
-        event.preventDefault();
-        navigate('/home', { state: { student_id: student_id } }); // Navigates to and passes the student id to the profile page
-    };
-
     return (
         <div>
             <h1>
                 Profile Page
             </h1>
-            <button onClick={navToHome}>
+            <button onClick={() => navigate('/home', { state: { student_id: student_id } })}>
                 Back
             </button>
 
             {ProfileInfo(student_id)}
 
-            <a href="/">
-                <button>
-                    Saved Trips - TBD
-                </button>
-            </a>
+            <button onClick={() => navigate('/saved', { state: { student_id: student_id } })}>
+                Saved Trips
+            </button>
+            <button onClick={() => navigate('/past', { state: { student_id: student_id } })}>
+                Past Trips
+            </button>
             <a href="/">
                 <button>
                     Sign Out

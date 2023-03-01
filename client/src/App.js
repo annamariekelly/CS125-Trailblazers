@@ -14,7 +14,7 @@ import {
   addTrip,
   updateTrip,
   deleteTrip,
-} from "./helpers/supabase";
+} from "./database/supabase";
 
 function App() {
   const [data, setData] = React.useState(null);
