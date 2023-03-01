@@ -8,7 +8,7 @@ const Dropdown = ({ label, items, handleChange }) => {
                 {label}
                 <select onChange={handleChange}>
                     {items.map((item) => 
-                        <option value={item}>{item}</option>
+                        <option key={item} value={item}>{item}</option>
                     )}
                 </select>
             </label>
