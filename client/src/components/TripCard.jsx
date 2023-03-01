@@ -1,10 +1,15 @@
 import React from "react";
 
-const TripCard = () => {
+const TripCard = ({busId, rating}) => {
 
     return (
         <div>
-            hi
+            <h1>
+                {busId}
+            </h1>
+            <h4>
+                {rating}
+            </h4>
         </div>
     );
 };
