@@ -8,12 +8,14 @@ import Dropdown from "../components/Dropdown.jsx";
 
 import { TERRAIN_TYPES, INTENSITIES, DISTANCES, TIMES } from "../constants";
 
+// import { getRecList } from "../backend/recAlgorithm";
+
 const HomePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { student_id } = location.state;
-    const [terrainType, setTerrainType] = useState(TERRAIN_TYPES[0]);
-    const [intensity, setIntensity] = useState(INTENSITIES[0]);
+    const [terrainType, setTerrainType] = useState(0);
+    const [intensity, setIntensity] = useState(0);
     const [distance, setDistance] = useState(DISTANCES[0]);
     const [time, setTime] = useState(TIMES[0]);
     
@@ -26,6 +28,9 @@ const HomePage = () => {
                     console.log('fetch user error: ', error.message);
                 }
             });
+
+        // getRecList(student_id, '3641 Baylor Street, Irvine, CA', terrainType, time, intensity)
+        //     .then((rec_list) => console.log(`Rec List: ${rec_list}`));
     }, []);
 
     const handleTerrainDropdownChange = (event) => {
@@ -61,11 +66,11 @@ const HomePage = () => {
                 Profile
             </button>
             <div>
-                <Dropdown label="Terrain:" items={TERRAIN_TYPES} handleChange={handleTerrainDropdownChange} />
+                <Dropdown label="Terrain:" items={TERRAIN_TYPES} handleChange={handleTerrainDropdownChange} isEnum/>
                 <p>Terrain Type Chosen: {terrainType}</p>
             </div>
             <div>
-                <Dropdown label="Intensity:" items={INTENSITIES} handleChange={handleIntensityDropdownChange} />
+                <Dropdown label="Intensity:" items={INTENSITIES} handleChange={handleIntensityDropdownChange} isEnum/>
                 <p>Intensity Chosen: {intensity}</p>
             </div>
             <div>
