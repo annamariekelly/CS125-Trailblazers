@@ -1,13 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import { fetchUser } from "../database/supabase";
 
+import Dropdown from "../components/Dropdown.jsx";
+
+import { TERRAIN_TYPES, INTENSITIES } from "../constants";
+
 const HomePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { student_id } = location.state;
+    const [terrainType, setTerrainType] = useState(TERRAIN_TYPES[0]);
+    const [intensity, setIntensity] = useState(INTENSITIES[0]);
     
     useEffect(() => {
         fetchUser(student_id)
@@ -19,6 +25,14 @@ const HomePage = () => {
                 }
             });
     }, []);
+
+    const handleTerrainDropdownChange = (event) => {
+        setTerrainType(event.target.value);
+    }
+
+    const handleIntensityDropdownChange = (event) => {
+        setIntensity(event.target.value);
+    }
 
     return (
         <div>
@@ -36,6 +50,14 @@ const HomePage = () => {
             <button onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
                 Profile
             </button>
+            <div>
+                <Dropdown label="Terrain:" items={TERRAIN_TYPES} handleChange={handleTerrainDropdownChange} />
+                <p>Terrain Type Chosen: {terrainType}</p>
+            </div>
+            <div>
+                <Dropdown label="Intensity:" items={INTENSITIES} handleChange={handleIntensityDropdownChange} />
+                <p>Intensity Chosen: {intensity}</p>
+            </div>
         </div>
     );
 };
