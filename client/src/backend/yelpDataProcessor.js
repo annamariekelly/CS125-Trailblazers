@@ -1,4 +1,4 @@
-import { parseParams, searchYelp } from './yelp.js'
+import {parseSearchParams, searchYelp} from './yelp.js'
 
 /**
  * The `CATEGORIES` object is an array of indexable objects representing different types of activities
