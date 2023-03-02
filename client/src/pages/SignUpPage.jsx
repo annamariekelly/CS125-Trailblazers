@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { createUser } from "../database/supabase";
+import { TERRAIN_TYPES } from "../constants";
 
 const SignUpForm = () => {
     const navigate = useNavigate();
@@ -105,43 +106,17 @@ const SignUpForm = () => {
           </div>
           <div>
             Terrain:
-            <label>
-                <input 
-                    type="radio" 
-                    value="Foodie Finds"
-                    checked={placeCategory === "Foodie Finds"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                    required
-                />
-                Foodie Finds
-            </label>
-            <label>
-                <input 
-                    type="radio" 
-                    value="Nature Navigators"
-                    checked={placeCategory === "Nature Navigators"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                />
-                Nature Navigators
-            </label>
-            <label>
-                <input 
-                    type="radio" 
-                    value="Adventure Seekers"
-                    checked={placeCategory === "Adventure Seekers"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                />
-                Adventure Seekers
-            </label>
-            <label>
-                <input 
-                    type="radio" 
-                    value="Metropolis Marvels"
-                    checked={placeCategory === "Metropolis Marvels"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                />
-                Metropolis Marvels
-            </label>
+            {TERRAIN_TYPES.map((terrain_type) => 
+                <label>
+                    <input 
+                        type="radio" 
+                        value={terrain_type}
+                        checked={placeCategory === terrain_type}
+                        onChange={(e) => setPlaceCategory(e.target.value)}
+                    />
+                    {terrain_type}
+                </label>
+            )}
           </div>
           <input type="submit" />
         </form>
