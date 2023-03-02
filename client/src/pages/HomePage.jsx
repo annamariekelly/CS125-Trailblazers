@@ -6,9 +6,9 @@ import { fetchUser } from "../database/supabase";
 
 import Dropdown from "../components/Dropdown.jsx";
 
-import { TERRAIN_TYPES, INTENSITIES, DISTANCES, TIMES } from "../constants";
+import { TERRAIN_TYPES, INTENSITIES, TIMES } from "../constants.js";
 
-// import { getRecList } from "../backend/recAlgorithm";
+// import { getRecList } from "../backend/recAlgorithm.js";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -16,7 +16,6 @@ const HomePage = () => {
     const { student_id } = location.state;
     const [terrainType, setTerrainType] = useState(0);
     const [intensity, setIntensity] = useState(0);
-    const [distance, setDistance] = useState(DISTANCES[0]);
     const [time, setTime] = useState(TIMES[0]);
     
     useEffect(() => {
@@ -39,10 +38,6 @@ const HomePage = () => {
 
     const handleIntensityDropdownChange = (event) => {
         setIntensity(event.target.value);
-    }
-
-    const handleDistanceDropdownChange = (event) => {
-        setDistance(event.target.value);
     }
 
     const handleTimeDropdownChange = (event) => {
@@ -72,10 +67,6 @@ const HomePage = () => {
             <div>
                 <Dropdown label="Intensity:" items={INTENSITIES} handleChange={handleIntensityDropdownChange} isEnum/>
                 <p>Intensity Chosen: {intensity}</p>
-            </div>
-            <div>
-                <Dropdown label="Distance Away (mi):" items={DISTANCES} handleChange={handleDistanceDropdownChange} />
-                <p>Distance Chosen: {distance}</p>
             </div>
             <div>
                 <Dropdown label="Time (min):" items={TIMES} handleChange={handleTimeDropdownChange} />
