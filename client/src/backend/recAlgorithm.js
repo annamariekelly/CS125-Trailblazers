@@ -19,15 +19,12 @@ const INTENSITIES = {
  * @param {number} intensity - The user's desired intensity level.
  * @returns {Promise} A promise that resolves to an array of location recommendations
  */
-export async function getRecList(studentID, currentLocation, terrainPreference, maxTime, intensity) {
+export function getRecList(studentID, currentLocation, terrainPreference, maxTime, intensity) {
     const searchRadius = calcSearchRadius(maxTime, intensity);
-    let results = await findResults(currentLocation, terrainPreference, searchRadius); //add current location and search radius
 
-    //pre-processing
-    let sortedResults = sortResults(results, "d");
-    let trimmedResults = trimResults(studentID, sortedResults);
-
-    return trimmedResults;
+    return findResults(currentLocation, terrainPreference, searchRadius)
+        .then((results) => sortResults(results, "d"))
+        .then((sortedResults) => trimResults(studentID, sortedResults));
 }
 
 
@@ -50,8 +47,8 @@ function calcSearchRadius(maxTime, intensity= 0){
  * @param {Array} results - Yelp API Results
  * @returns {Array} Returns trimmed results list
  */
-function trimResults(studentID, results){
-    function Location(id, name, image_url, street, city, url, distance, rating){
+async function trimResults(studentID, results) {
+    function Location(id, name, image_url, street, city, url, distance, rating) {
         this.id = id;
         this.name = name;
         this.image_url = image_url;
@@ -61,24 +58,47 @@ function trimResults(studentID, results){
         this.distance = distance;
         this.rating = rating;
     }
-    let trimmedResults = []
-    getTrips("Past", studentID).then(({data, error}) => {
-        if (data) {
-            console.log('Request for Past Trips succeeded with data: ', data);
-            for (const result of results){
-                if (calcChance(result, data)){
-                    trimmedResults.push(new Location(result.id, result.name, result.image_url,
-                        result.location.address1, result.location.city, result.url, result.distance, result.rating));
-                }
+
+    let trimmedResults = [];
+
+    const { data, error } = await getTrips("Past", studentID);
+
+    if (data) {
+        console.log("Request for Past Trips succeeded with data: ", data);
+        for (const result of results) {
+            if (calcChance(result, data)) {
+                trimmedResults.push(
+                    new Location(
+                        result.id,
+                        result.name,
+                        result.image_url,
+                        result.location.address1,
+                        result.location.city,
+                        result.url,
+                        result.distance,
+                        result.rating
+                    )
+                );
             }
-            return trimmedResults
-        } else {
-            console.log('Get past trips error: ', error);
-            trimmedResults = results.map(result => new Location(result.id, result.name, result.image_url,
-                result.location.address1, result.location.city, result.url, result.distance, result.rating));
-            return trimmedResults
         }
-    });
+    } else {
+        console.log("Get past trips error: ", error);
+        trimmedResults = results.map(
+            (result) =>
+                new Location(
+                    result.id,
+                    result.name,
+                    result.image_url,
+                    result.location.address1,
+                    result.location.city,
+                    result.url,
+                    result.distance,
+                    result.rating
+                )
+        );
+    }
+
+    return trimmedResults;
 }
 
 
@@ -107,15 +127,5 @@ function calcChance(location, pastTrips){
     }
 }
 
-
-//TESTING
-/*
-addTrip('Past', 43798917, 'UQdf0dhCdH-IpNhCseoibQ', 1)
-    .then((err) => {
-        if (err) {
-            console.log('add past trip error: ', err.message);
-        }
-    });
-*/
-//let recList = getRecList(43798917,'3641 Baylor Street, Irvine, CA', 0, 30, 0);
+//let recList = await getRecList(43798917,'3641 Baylor Street, Irvine, CA', 0, 30, 0);
 //console.log(recList);
