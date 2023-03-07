@@ -5,13 +5,13 @@ import reportWebVitals from './reportWebVitals.js';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import StartPage from "./pages/StartPage.jsx";
-import SignUpPage from "./pages/SignUpPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import HomePage from './pages/HomePage.jsx';
-import ProfilePage from './pages/ProfilePage.jsx';
-import SavedPage from './pages/SavedPage.jsx';
-import PastPage from './pages/PastPage.jsx';
+import StartPage from "./pages/StartPage/StartPage.jsx";
+import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import HomePage from './pages/HomePage/HomePage.jsx';
+import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
+import SavedPage from './pages/SavedPage/SavedPage.jsx';
+import PastPage from './pages/PastPage/PastPage.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

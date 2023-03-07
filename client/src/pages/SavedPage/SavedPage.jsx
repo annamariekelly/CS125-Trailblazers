@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import TripCard from "../components/TripCard";
+import TripCard from "../../components/TripCard";
 
 // import { fetchUser } from "../database/supabase";
 
-const PastPage = () => {
+const SavedPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { student_id } = location.state;
@@ -25,10 +25,10 @@ const PastPage = () => {
     return (
         <div>
             <h1>
-                Past Trips Page
+                Saved Trips Page
             </h1>
             <p>
-                Past Trips for user: {student_id}
+                Saved Trips for user: {student_id}
             </p>
             <TripCard/>
             <TripCard/>
@@ -39,4 +39,4 @@ const PastPage = () => {
     );
 };
 
-export default PastPage;
+export default SavedPage;

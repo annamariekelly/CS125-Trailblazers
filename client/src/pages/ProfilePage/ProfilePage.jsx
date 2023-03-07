@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { fetchUser, updateUser } from "../database/supabase";
+import { fetchUser, updateUser } from "../../database/supabase";
 
 const ProfileInfo = (student_id) => {
     const [name, setName] = useState('');

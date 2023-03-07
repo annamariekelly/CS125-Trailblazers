@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { fetchUser } from "../database/supabase";
+import { fetchUser } from "../../database/supabase";
 
-import Dropdown from "../components/Dropdown.jsx";
+import Dropdown from "../../components/Dropdown.jsx";
 
-import { TERRAIN_TYPES, INTENSITIES, TIMES } from "../constants.js";
+import { TERRAIN_TYPES, INTENSITIES, TIMES } from "../../constants.js";
 
 // import { getRecList } from "../backend/recAlgorithm.js";
 

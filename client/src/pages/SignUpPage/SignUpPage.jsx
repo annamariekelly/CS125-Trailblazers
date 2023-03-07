@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { createUser } from "../database/supabase";
-import { TERRAIN_TYPES } from "../constants";
+import { createUser } from "../../database/supabase";
+import { TERRAIN_TYPES } from "../../constants";
 
 const SignUpForm = () => {
     const navigate = useNavigate();

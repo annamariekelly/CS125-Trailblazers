@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { fetchUser } from "../database/supabase";
+import { fetchUser } from "../../database/supabase";
 
 const LoginForm = () => {
     const navigate = useNavigate(); // Used to explicitly navigate to routes/pages
