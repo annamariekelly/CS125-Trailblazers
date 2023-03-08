@@ -107,10 +107,10 @@ const SignUpForm = () => {
                 </button>
             </label>
           </div>
-          <div>
-            Terrain:
+          <div className="terrain-container">
+            <span className="terrain-title">Terrain:</span>
             {TERRAIN_TYPES.map((terrain_type) => 
-                <label>
+                <label className="terrain-label">
                     <input 
                         type="radio" 
                         value={terrain_type}
@@ -121,7 +121,7 @@ const SignUpForm = () => {
                 </label>
             )}
           </div>
-          <input type="submit" />
+          <input type="submit" className="gray-button sign-up-submit" />
         </form>
       );
 };
@@ -129,7 +129,7 @@ const SignUpForm = () => {
 const SignUpPage = () => {
 
     return (
-        <div>
+        <div className="sign-up-page-container">
             <h1>
                 Sign Up Page
             </h1>

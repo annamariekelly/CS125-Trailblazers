@@ -21,18 +21,19 @@ p {
 }
 
 label {
-    display: table;
+    display: flex;
+    justify-content: space-between;
     margin: 5px 0;
 }
 
-input {
+input[type=text] {
     position: relative;
     width: auto;
-    margin: 0 10px;
+    margin-left:10px;
 }
 
 .show-password {
-    width: auto;
+    margin-left: 10px;
 }
 
 .white-button {
