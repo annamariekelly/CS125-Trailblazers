@@ -13,12 +13,12 @@ const StartPage = () => {
                 Your Guide to Exploring on Foot
             </p>
             <a href="/signup">
-                <button>
+                <button className="gray-button">
                     Sign Up
                 </button>
             </a>
             <a href="/login">
-                <button>
+                <button className="gray-button">
                     Log In
                 </button>
             </a>

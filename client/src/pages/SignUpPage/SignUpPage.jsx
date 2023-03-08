@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { createUser } from "../../database/supabase";
 import { TERRAIN_TYPES } from "../../constants";
 
+import "./SignUpPage.css";
+import "../globalStyles.css";
+
 const SignUpForm = () => {
     const navigate = useNavigate();
 
@@ -57,7 +60,7 @@ const SignUpForm = () => {
     };
 
     return (
-        <form onSubmit={handleSignUpSubmit}>
+        <form onSubmit={handleSignUpSubmit} className="sign-up-form">
           <div>
             <label>Name:
                 <input 
@@ -86,10 +89,10 @@ const SignUpForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                <button onClick={handleShowPassword} className="show-password">
+                    Show
+                </button>
             </label>
-            <button onClick={handleShowPassword}>
-                Show
-            </button>
           </div>
           <div>
             <label>Confirm Password:
@@ -99,10 +102,10 @@ const SignUpForm = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
+                <button onClick={handleShowConfirmPassword} className="show-password">
+                    Show
+                </button>
             </label>
-            <button onClick={handleShowConfirmPassword}>
-                Show
-            </button>
           </div>
           <div>
             Terrain:
@@ -131,7 +134,7 @@ const SignUpPage = () => {
                 Sign Up Page
             </h1>
             <a href="/">
-                <button>
+                <button className="white-button">
                     Back
                 </button>
             </a>
