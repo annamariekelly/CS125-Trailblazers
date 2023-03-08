@@ -60,7 +60,7 @@ const SignUpForm = () => {
     };
 
     return (
-        <form onSubmit={handleSignUpSubmit} className="sign-up-form">
+        <form onSubmit={handleSignUpSubmit} className="form-container">
           <div>
             <label>Name:
                 <input 
@@ -121,7 +121,7 @@ const SignUpForm = () => {
                 </label>
             )}
           </div>
-          <input type="submit" className="gray-button sign-up-submit" />
+          <input type="submit" className="gray-button submit-button" />
         </form>
       );
 };
@@ -129,7 +129,7 @@ const SignUpForm = () => {
 const SignUpPage = () => {
 
     return (
-        <div className="sign-up-page-container">
+        <div className="form-page-container">
             <h1>
                 Sign Up Page
             </h1>

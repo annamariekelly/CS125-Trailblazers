@@ -13,7 +13,7 @@ p {
 
 .gray-button {
     background-color: #C5C5C5;
-    margin: 5px 10px;
+    margin: 10px 10px;
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -42,4 +42,40 @@ input[type=text] {
     border: none;
     border-radius: 5px;
     padding: 10px;
+}
+
+.form-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F1F1;
+    margin: 30px;
+    border-radius: 5%;
+    padding: 25px;
+    border: 1px solid black;
+}
+
+.terrain-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+
+.terrain-title {
+    width: 100%;
+}
+
+.terrain-label {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.submit-button {
+    align-self: center;
 }

@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { fetchUser } from "../../database/supabase";
 
+import "./LoginPage.css";
+import "../globalStyles.css";
+
 const LoginForm = () => {
     const navigate = useNavigate(); // Used to explicitly navigate to routes/pages
 
@@ -43,7 +46,7 @@ const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={handleLoginSubmit}>
+        <form onSubmit={handleLoginSubmit} className="form-container">
           <div>
             <label>Student ID:
                 <input 
@@ -62,12 +65,12 @@ const LoginForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                <button onClick={handleShowPassword}>
+                    Show
+                </button>
             </label>
-            <button onClick={handleShowPassword}>
-                Show
-            </button>
           </div>
-          <input type="submit" />
+          <input type="submit" className="gray-button" />
         </form>
     );
 }
@@ -75,12 +78,12 @@ const LoginForm = () => {
 const LoginPage = () => {
 
     return (
-        <div>
+        <div className="form-page-container">
             <h1>
-                Login Page
+                Log In
             </h1>
             <a href="/">
-                <button>
+                <button className="white-button">
                     Back
                 </button>
             </a>
