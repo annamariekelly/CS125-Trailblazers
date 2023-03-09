@@ -10,6 +10,7 @@ export function getCurrentLocation() {
             axios.get(`${apiUrl}&latlng=${latitude},${longitude}`).then(response => {
                 const location = response.data.results[0].formatted_address;
                 console.log(`Current location: ${location}`);
+                return location
             }).catch(error => {
                 console.log(`Error: ${error}`);
             });
