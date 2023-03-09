@@ -1,10 +1,19 @@
 import React from "react";
 
-const TripCard = () => {
+// import { getBusinessInfo } from "../backend/yelp";
+
+const TripCard = ({busId, rating}) => {
+
+
 
     return (
         <div>
-            hi
+            <h1>
+                {busId}
+            </h1>
+            <h4>
+                {rating ? rating : 'no rating'}
+            </h4>
         </div>
     );
 };

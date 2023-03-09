@@ -1,26 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import { getTrips } from "../database/supabase";
 import TripCard from "../components/TripCard";
-
-// import { fetchUser } from "../database/supabase";
 
 const PastPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { student_id } = location.state;
     
-    // useEffect(() => {
-    //     fetchUser(student_id)
-    //         .then(({data, error}) => {
-    //             if (data) {
-    //                 console.log('one user: ', data);
-    //             } else {
-    //                 console.log('fetch user error: ', error.message);
-    //             }
-    //         });
-    // }, []);
+    const [trips, setTrips] = useState([]);
+
+    useEffect(() => {
+        getTrips('Past', student_id)
+            .then(({data, error}) => {
+                if (data) {
+                    console.log('trips returned: ', data);
+                    setTrips(data);                    
+                } else {
+                    console.log('fetch user error: ', error.message);
+                }
+            });
+    }, []);
 
     return (
         <div>
@@ -30,8 +32,14 @@ const PastPage = () => {
             <p>
                 Past Trips for user: {student_id}
             </p>
-            <TripCard/>
-            <TripCard/>
+
+            { trips.map( (trip) => { return (
+                    <div>
+                        <TripCard busId={trip.business_id} rating={trip.rating}/>
+                    </div>
+                );
+            } ) }
+
             <button onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
                 Back
             </button>
