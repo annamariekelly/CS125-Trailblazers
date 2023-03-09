@@ -33,12 +33,7 @@ const PastPage = () => {
                 Past Trips for user: {student_id}
             </p>
 
-            { trips.map( (trip) => { return (
-                    <div>
-                        <TripCard busId={trip.business_id} rating={trip.rating}/>
-                    </div>
-                );
-            } ) }
+            <TripCard trips={trips}/>
 
             <button onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
                 Back
