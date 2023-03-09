@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import { fetchUser } from "../../database/supabase";
+import { getCurrentLocation } from "../../backend/currentLocation";
 
 import Dropdown from "../../components/Dropdown.jsx";
 
@@ -30,7 +31,10 @@ const HomePage = () => {
                     const place_category_enum = TERRAIN_TYPES.findIndex((terrain_type) => place_category === terrain_type);
                     console.log(`place cat enum: ${place_category_enum}`);
 
-                    // getRecList(student_id, '3641 Baylor Street, Irvine, CA', place_category_enum, time, intensity)
+                    const userLocation = getCurrentLocation(student_id);
+                    console.log(`location: ${userLocation}`);
+
+                    // getRecList(student_id, userLocation, place_category_enum, time, intensity)
                     //     .then((rec_list) => console.log(`Rec List: ${rec_list}`));
                 } else {
                     console.log('fetch user error: ', error.message);
