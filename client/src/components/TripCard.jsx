@@ -1,6 +1,10 @@
 import React from "react";
 
+// import { getBusinessInfo } from "../backend/yelp";
+
 const TripCard = ({busId, rating}) => {
+
+
 
     return (
         <div>
@@ -8,7 +12,7 @@ const TripCard = ({busId, rating}) => {
                 {busId}
             </h1>
             <h4>
-                {rating}
+                {rating ? rating : 'no rating'}
             </h4>
         </div>
     );
