@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { fetchUser, updateUser } from "../database/supabase";
+import { fetchUser, updateUser } from "../../database/supabase";
+import { TERRAIN_TYPES } from "../../constants";
+
+import "./ProfilePage.css";
+import "../globalStyles.css";
 
 const ProfileInfo = (student_id) => {
     const [name, setName] = useState('');
@@ -42,12 +46,24 @@ const ProfileInfo = (student_id) => {
     };
 
     return (
-        <form  onSubmit={updateTerrain}>
+        <form onSubmit={updateTerrain} className="form-container" >
           <div>
-            Name: {name}
+            <label>Name:
+                <input
+                    type="text"
+                    value={name}
+                    disabled
+                />
+            </label>
           </div>
           <div>
-            Student ID: {student_id}
+            <label>Student ID:
+                <input
+                    type="text"
+                    value={student_id}
+                    disabled
+                />
+            </label>
           </div>
           
           <div>
@@ -57,53 +73,26 @@ const ProfileInfo = (student_id) => {
                     value={password}
                     disabled
                 />
-            </label>
-            <button onClick={handleShowPassword}>
-                Show
-            </button>
-          </div>
-          
-          <div>
-            Terrain:
-            <label>
-                <input 
-                    type="radio" 
-                    value="Foodie Finds"
-                    checked={placeCategory === "Foodie Finds"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                    required
-                />
-                Foodie Finds
-            </label>
-            <label>
-                <input 
-                    type="radio" 
-                    value="Nature Navigators"
-                    checked={placeCategory === "Nature Navigators"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                />
-                Nature Navigators
-            </label>
-            <label>
-                <input 
-                    type="radio" 
-                    value="Adventure Seekers"
-                    checked={placeCategory === "Adventure Seekers"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                />
-                Adventure Seekers
-            </label>
-            <label>
-                <input 
-                    type="radio" 
-                    value="Metropolis Marvels"
-                    checked={placeCategory === "Metropolis Marvels"}
-                    onChange={(e) => setPlaceCategory(e.target.value)}
-                />
-                Metropolis Marvels
+                <button onClick={handleShowPassword}>
+                    Show
+                </button>
             </label>
           </div>
-          <input type="submit" value="Update Terrain"/>
+          <div className="terrain-container">
+            <span className="terrain-title">Terrain:</span>
+            {TERRAIN_TYPES.map((terrain_type) => 
+                <label className="terrain-label">
+                    <input 
+                        type="radio" 
+                        value={terrain_type}
+                        checked={placeCategory === terrain_type}
+                        onChange={(e) => setPlaceCategory(e.target.value)}
+                    />
+                    {terrain_type}
+                </label>
+            )}
+          </div>
+          <input type="submit" value="Update Terrain" className="gray-button submit-button"/>
         </form>
     );
 }

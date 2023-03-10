@@ -1,19 +1,24 @@
 import React from "react";
+import "./StartPage.css";
+import "../globalStyles.css";
 
 const StartPage = () => {
 
     return (
-        <div>
+        <div className="start-page-container">
             <h1>
-                Start Page
+                Trailblazers
             </h1>
+            <p>
+                Your Guide to Exploring on Foot
+            </p>
             <a href="/signup">
-                <button>
+                <button className="gray-button">
                     Sign Up
                 </button>
             </a>
             <a href="/login">
-                <button>
+                <button className="gray-button">
                     Log In
                 </button>
             </a>

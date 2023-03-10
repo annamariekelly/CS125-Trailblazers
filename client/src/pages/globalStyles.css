@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box
+} 
+
+h1 {
+    margin: 30px 10px 5px 10px;
+    font-size: 3em;
+}
+
+p {
+    margin: 5px 10px;
+}
+
+.gray-button {
+    background-color: #C5C5C5;
+    margin: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 250px;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+input[type=text] {
+    position: relative;
+    width: auto;
+    margin-left:10px;
+}
+
+.show-password {
+    margin-left: 10px;
+}
+
+.white-button {
+    background: #FFFFFF;
+    margin: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F1F1;
+    margin: 30px;
+    border-radius: 5%;
+    padding: 25px;
+    border: 1px solid black;
+}
+
+.terrain-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+
+.terrain-title {
+    width: 100%;
+}
+
+.terrain-label {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.submit-button {
+    align-self: center;
+}
