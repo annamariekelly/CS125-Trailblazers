@@ -9,7 +9,7 @@ import Dropdown from "../../components/Dropdown.jsx";
 
 import { TERRAIN_TYPES, INTENSITIES, TIMES } from "../../constants.js";
 
-// import { getRecList } from "../backend/recAlgorithm.js";
+// import { getRecList } from "../../backend/recAlgorithm";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const HomePage = () => {
                     console.log(`location: ${userLocation}`);
 
                     // getRecList(student_id, userLocation, place_category_enum, time, intensity)
-                    //     .then((rec_list) => console.log(`Rec List: ${rec_list}`));
+                    //     .then((rec_list) => console.log(`Rec List`, rec_list));
                 } else {
                     console.log('fetch user error: ', error.message);
                 }
