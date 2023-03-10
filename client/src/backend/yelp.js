@@ -41,6 +41,7 @@ export function searchYelp(query) {
 }
 
 export function getBusinessInfo(businesses_id) {
+    console.log('getting bus info');
     const query = `${baseURL}${businesses_id}`;
     return fetch(query, options)
         .then(response => response.json())
