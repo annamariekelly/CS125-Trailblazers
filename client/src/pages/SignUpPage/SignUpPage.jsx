@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { createUser } from "../../database/supabase";
 import { TERRAIN_TYPES } from "../../constants";
 
+import NavBar from "../../components/NavBar";
+
 import "./SignUpPage.css";
 import "../globalStyles.css";
 
@@ -81,30 +83,36 @@ const SignUpForm = () => {
                 />
             </label>
           </div>
-          <div>
-            <label>Password:
-                <input 
-                    type={showPassword ? "text" : "password"} 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button onClick={handleShowPassword} className="show-password">
-                    Show
-                </button>
+          <div> 
+            <label> Password: 
+                <div className="label-password">
+                    <input 
+                        className="password"
+                        type={showPassword ? "text" : "password"} 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <button onClick={handleShowPassword} className="show-password">
+                        Show
+                    </button>
+                </div>
             </label>
           </div>
           <div>
             <label>Confirm Password:
-                <input 
-                    type={showConfirmPassword ? "text" : "password"} 
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                />
-                <button onClick={handleShowConfirmPassword} className="show-password">
-                    Show
-                </button>
+                <div className="label-password">
+                    <input 
+                        className="password"
+                        type={showConfirmPassword ? "text" : "password"} 
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                    <button onClick={handleShowConfirmPassword} className="show-password">
+                        Show
+                    </button>
+                </div>
             </label>
           </div>
           <div className="terrain-container">
@@ -127,19 +135,19 @@ const SignUpForm = () => {
 };
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
 
     return (
-        <div className="form-page-container">
-            <h1>
-                Sign Up Page
-            </h1>
-            <a href="/">
-                <button className="white-button">
-                    Back
-                </button>
-            </a>
-            {SignUpForm()}
+        <div>
+            <NavBar nav={() => navigate('/')}/>
+            <div className="form-page-container">
+                <h1>
+                    Sign Up Page
+                </h1>
+                {SignUpForm()}
+            </div>
         </div>
+        
     );
 };
 

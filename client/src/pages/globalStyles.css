@@ -3,7 +3,7 @@
 } 
 
 h1 {
-    margin: 30px 10px 5px 10px;
+    margin: 10px 10px 5px 10px;
     font-size: 3em;
 }
 
@@ -13,7 +13,7 @@ p {
 
 .gray-button {
     background-color: #C5C5C5;
-    margin: 10px 10px;
+    margin:  20px 10px 0px 10px;
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -22,26 +22,36 @@ p {
 
 label {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin: 5px 0;
+}
+
+.label-password {
+    /* flex-direction: row; */
+    justify-content: space-between !important ;
 }
 
 input[type=text] {
     position: relative;
     width: auto;
-    margin-left:10px;
+}
+
+.password {
+    width: 78%;
+    margin-right: 2%;
 }
 
 .show-password {
-    margin-left: 10px;
+    width: 20%;
 }
 
 .white-button {
     background: #FFFFFF;
-    margin: 5px 10px;
+    /* margin: 5px 5px; */
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px 20px;
 }
 
 .form-page-container {
@@ -49,15 +59,16 @@ input[type=text] {
     flex-direction: column;
     align-items: center;
     margin: 20px;
+    height: 100%;
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
     background-color: #F1F1F1;
-    margin: 30px;
+    margin: 5px 30px 15px 30px;
     border-radius: 5%;
-    padding: 25px;
+    padding: 15px 25px;
     border: 1px solid black;
 }
 
@@ -73,9 +84,35 @@ input[type=text] {
 
 .terrain-label {
     display: flex;
+    flex-direction: row;
     justify-content: flex-start;
+    margin-top: 3px;
 }
 
 .submit-button {
     align-self: center;
+}
+
+
+.navbar {
+    width: 100%;  
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(206, 221, 206);
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    width: 25px;
+    height: 25px;
+}
+
+.navbar-title {
+    font-size: 20px;
+    padding-left: 5px;
+    padding-bottom: 3px;
 }

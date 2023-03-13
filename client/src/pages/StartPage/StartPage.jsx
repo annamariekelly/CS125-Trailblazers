@@ -2,6 +2,8 @@ import React from "react";
 import "./StartPage.css";
 import "../globalStyles.css";
 
+import trailblazersLogo from '../../trailblazers.png';
+
 const StartPage = () => {
 
     return (
@@ -12,6 +14,7 @@ const StartPage = () => {
             <p>
                 Your Guide to Exploring on Foot
             </p>
+            <img className="home-image" src={trailblazersLogo}/>
             <a href="/signup">
                 <button className="gray-button">
                     Sign Up
