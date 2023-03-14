@@ -12,6 +12,8 @@ import { TERRAIN_TYPES, INTENSITIES, TIMES } from "../../constants.js";
 import TripCard from "../../components/TripCard";
 import NavBar from "../../components/NavBar";
 
+import { sampleRecList } from "../../backend/sampleRecList";
+
 // import { getRecList } from "../../backend/recAlgorithm";
 
 import "./HomePage.css";
@@ -91,8 +93,23 @@ const HomePage = () => {
                         {/* <p>Time Chosen: {time}</p> */}
                     </div>
                 </div>
-                
-                {/* <TripCard student_id={student_id} page='Past'/> */}
+                {sampleRecList.map((business) => {
+                    const { name, rating, distance, image_url, url } = business;
+                    const { address1, city, state } = business.location;
+
+                    return (
+                        <TripCard
+                            name={name}
+                            yRating={rating}
+                            dist={distance}
+                            img={image_url}
+                            url={url}
+                            street={address1}
+                            city={city}
+                            state={state}
+                        />
+                    )
+                })}
             </div>
         </div>
         
