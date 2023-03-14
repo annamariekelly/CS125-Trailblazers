@@ -7,6 +7,8 @@ import { TERRAIN_TYPES } from "../../constants";
 import "./ProfilePage.css";
 import "../globalStyles.css";
 
+import NavBar from "../../components/NavBar";
+
 const ProfileInfo = (student_id) => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -68,14 +70,17 @@ const ProfileInfo = (student_id) => {
           
           <div>
             <label>Password:
-                <input 
-                    type={showPassword ? "text" : "password"} 
-                    value={password}
-                    disabled
-                />
-                <button onClick={handleShowPassword}>
-                    Show
-                </button>
+                <div className="label-password">
+                    <input 
+                        className="password"
+                        type={showPassword ? "text" : "password"} 
+                        value={password}
+                        disabled
+                    />
+                    <button onClick={handleShowPassword}>
+                        Show
+                    </button>
+                </div>
             </label>
           </div>
           <div className="terrain-container">
@@ -104,26 +109,30 @@ const ProfilePage = () => {
 
     return (
         <div>
-            <h1>
-                Profile Page
-            </h1>
-            <button onClick={() => navigate('/home', { state: { student_id: student_id } })}>
-                Back
-            </button>
+            <NavBar nav={() => navigate('/home', { state: { student_id: student_id } })}/>
+            <div className="home-container">
+                <h1>
+                    Profile Page
+                </h1>
 
-            {ProfileInfo(student_id)}
+                {ProfileInfo(student_id)}
 
-            <button onClick={() => navigate('/saved', { state: { student_id: student_id } })}>
-                Saved Trips
-            </button>
-            <button onClick={() => navigate('/past', { state: { student_id: student_id } })}>
-                Past Trips
-            </button>
-            <a href="/">
-                <button>
-                    Sign Out
-                </button>
-            </a>
+                <div>
+                    <button onClick={() => navigate('/saved', { state: { student_id: student_id } })}>
+                        Saved Trips
+                    </button>
+                    <button onClick={() => navigate('/past', { state: { student_id: student_id } })}>
+                        Past Trips
+                    </button>
+                </div>
+                
+                <a href="/">
+                    <button className="gray-button">
+                        Sign Out
+                    </button>
+                </a>
+            </div>
+            
         </div>
     );
 };

@@ -9,7 +9,13 @@ import Dropdown from "../../components/Dropdown.jsx";
 
 import { TERRAIN_TYPES, INTENSITIES, TIMES } from "../../constants.js";
 
+import TripCard from "../../components/TripCard";
+import NavBar from "../../components/NavBar";
+
 // import { getRecList } from "../../backend/recAlgorithm";
+
+import "./HomePage.css";
+import "../globalStyles.css";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -58,33 +64,38 @@ const HomePage = () => {
 
     return (
         <div>
-            <h1>
-                Home Page
-            </h1>
-            <p>
-                Logged in user: {student_id}
-            </p>
-            <a href="/">
-                <button>
-                    Back
-                </button>
-            </a>
-            <button onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
-                Profile
-            </button>
-            <div>
-                <Dropdown label="Terrain:" items={TERRAIN_TYPES} handleChange={handleTerrainDropdownChange} isEnum/>
-                <p>Terrain Type Chosen: {filterTerrainType}</p>
-            </div>
-            <div>
-                <Dropdown label="Intensity:" items={INTENSITIES} handleChange={handleIntensityDropdownChange} isEnum/>
-                <p>Intensity Chosen: {intensity}</p>
-            </div>
-            <div>
-                <Dropdown label="Time (min):" items={TIMES} handleChange={handleTimeDropdownChange} />
-                <p>Time Chosen: {time}</p>
+            <NavBar nav={() => navigate('/')}/>
+            <div className="home-container">
+                <h1>
+                    Home Page
+                </h1>
+                <p>
+                    Welcome User: {student_id}
+                </p>
+                <div>
+                    <button onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
+                        Profile
+                    </button>
+                </div>
+                <div className="home-filters">
+                    <div>
+                        <Dropdown label="Terrain:" items={TERRAIN_TYPES} handleChange={handleTerrainDropdownChange} isEnum/>
+                        {/* <p>Terrain Type Chosen: {filterTerrainType}</p> */}
+                    </div>
+                    <div>
+                        <Dropdown label="Intensity:" items={INTENSITIES} handleChange={handleIntensityDropdownChange} isEnum/>
+                        {/* <p>Intensity Chosen: {intensity}</p> */}
+                    </div>
+                    <div>
+                        <Dropdown label="Time (min):" items={TIMES} handleChange={handleTimeDropdownChange} />
+                        {/* <p>Time Chosen: {time}</p> */}
+                    </div>
+                </div>
+                
+                {/* <TripCard student_id={student_id} page='Past'/> */}
             </div>
         </div>
+        
     );
 };
 

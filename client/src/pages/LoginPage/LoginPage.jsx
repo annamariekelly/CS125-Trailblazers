@@ -5,6 +5,7 @@ import { fetchUser } from "../../database/supabase";
 
 import "./LoginPage.css";
 import "../globalStyles.css";
+import NavBar from "../../components/NavBar";
 
 const LoginForm = () => {
     const navigate = useNavigate(); // Used to explicitly navigate to routes/pages
@@ -59,15 +60,18 @@ const LoginForm = () => {
           </div>
           <div>
             <label>Password:
-                <input 
-                    type={showPassword ? "text" : "password"} 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button onClick={handleShowPassword}>
-                    Show
-                </button>
+                <div className="label-password">
+                    <input 
+                        className="password"
+                        type={showPassword ? "text" : "password"} 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <button onClick={handleShowPassword} className="show-password">
+                        Show
+                    </button>
+                </div>
             </label>
           </div>
           <input type="submit" className="gray-button" />
@@ -76,18 +80,17 @@ const LoginForm = () => {
 }
 
 const LoginPage = () => {
+    const navigate = useNavigate();
 
     return (
-        <div className="form-page-container">
-            <h1>
-                Log In
-            </h1>
-            <a href="/">
-                <button className="white-button">
-                    Back
-                </button>
-            </a>
-            {LoginForm()} 
+        <div>
+            <NavBar nav={() => navigate('/')}/>
+            <div className="form-page-container">
+                <h1>
+                    Log In
+                </h1>
+                {LoginForm()} 
+            </div>
         </div>
     );
 };
