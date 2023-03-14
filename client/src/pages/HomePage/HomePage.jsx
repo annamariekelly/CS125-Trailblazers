@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { fetchUser } from "../../database/supabase";
+import { fetchUser, getTrips } from "../../database/supabase";
 import { getCurrentLocation } from "../../backend/currentLocation";
 
 import Dropdown from "../../components/Dropdown.jsx";
 
-import { TERRAIN_TYPES, INTENSITIES, TIMES } from "../../constants.js";
+import { TERRAIN_TYPES, RATINGS, INTENSITIES, TIMES } from "../../constants.js";
 
 import TripCard from "../../components/TripCard";
 import NavBar from "../../components/NavBar";
@@ -23,10 +23,13 @@ const HomePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { student_id } = location.state;
-    const [filterTerrainType, setFilterTerrainType] = useState(0);
+    const [userPlaceCategoryEnum, setUserPlaceCategoryEnum] = useState(0);
+    const [userLocation, setUserLocation] = useState('');
+    const [filterRating, setFilterRating] = useState(0);
     const [intensity, setIntensity] = useState(0);
     const [time, setTime] = useState(TIMES[0]);
-    
+    const [trips, setTrips] = useState([]);
+
     useEffect(() => {
         fetchUser(student_id)
             .then(({data, error}) => {
@@ -38,22 +41,38 @@ const HomePage = () => {
 
                     const place_category_enum = TERRAIN_TYPES.findIndex((terrain_type) => place_category === terrain_type);
                     console.log(`place cat enum: ${place_category_enum}`);
+                    setUserPlaceCategoryEnum(place_category_enum);
 
                     const userLocation = getCurrentLocation(student_id);
                     console.log(`location: ${userLocation}`);
+                    setUserLocation(userLocation);
 
-                    // getRecList(student_id, userLocation, place_category_enum, time, intensity)
-                    //     .then((rec_list) => console.log(`Rec List`, rec_list));
                 } else {
                     console.log('fetch user error: ', error.message);
                 }
             });
+    })
+    
+    useEffect(() => {
+        getTrips('Past', student_id)
+            .then(({data, error}) => {
+                if (data) {
+                    setTrips(data);
+                    console.log('Past trips: ', data);
+                } else {
+                    console.log('get trips error: ', error.message);
+                }
+            });
 
-        
-    }, []);
+        // getRecList(student_id, userLocation, userPlaceCategoryEnum, time, intensity)
+        //     .then((rec_list) => {
+        //         console.log(`Rec List`, rec_list);
+        //         setTrips(rec_list);
+        //     });
+    }, [intensity, student_id, time]);
 
-    const handleTerrainDropdownChange = (event) => {
-        setFilterTerrainType(event.target.value);
+    const handleFilterRatingDropdownChange = (event) => {
+        setFilterRating(event.target.value);
     }
 
     const handleIntensityDropdownChange = (event) => {
@@ -81,8 +100,8 @@ const HomePage = () => {
                 </div>
                 <div className="home-filters">
                     <div>
-                        <Dropdown label="Terrain:" items={TERRAIN_TYPES} handleChange={handleTerrainDropdownChange} isEnum/>
-                        {/* <p>Terrain Type Chosen: {filterTerrainType}</p> */}
+                        <Dropdown label="Rating (>=):" items={RATINGS} handleChange={handleFilterRatingDropdownChange}/>
+                        {/* <p>Rating Chosen: {filterRating}</p> */}
                     </div>
                     <div>
                         <Dropdown label="Intensity:" items={INTENSITIES} handleChange={handleIntensityDropdownChange} isEnum/>
@@ -93,23 +112,26 @@ const HomePage = () => {
                         {/* <p>Time Chosen: {time}</p> */}
                     </div>
                 </div>
-                {sampleRecList.map((business) => {
-                    const { name, rating, distance, image_url, url } = business;
-                    const { address1, city, state } = business.location;
+                {trips.length > 0 && <div>{trips[0].business_id}</div>}
+                {/* Replace sampleRecList with actual rec list */}
+                {sampleRecList.length > 0 && sampleRecList
+                    .filter(({rating}) => rating >= filterRating)
+                    .map((business) => {
+                        const { name, rating, distance, image_url, url, street, city } = business;
 
-                    return (
-                        <TripCard
-                            name={name}
-                            yRating={rating}
-                            dist={distance}
-                            img={image_url}
-                            url={url}
-                            street={address1}
-                            city={city}
-                            state={state}
-                        />
-                    )
-                })}
+                        return (
+                            <TripCard
+                                name={name}
+                                yRating={rating}
+                                dist={distance}
+                                img={image_url}
+                                url={url}
+                                street={street}
+                                city={city}
+                            />
+                        );
+                    })
+                }
             </div>
         </div>
         

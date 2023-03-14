@@ -1,6 +1,6 @@
 import React  from "react";
 
-const TripCard = ({name, uRating, yRating, dist, img, url, street, city, state}) => {
+const TripCard = ({name, uRating, yRating, dist, img, url, street, city}) => {
 
     return (
         <div>
@@ -21,7 +21,7 @@ const TripCard = ({name, uRating, yRating, dist, img, url, street, city, state})
             <h4>
                 {street}
                 <br></br>
-                {`${city}, ${state}`}
+                {city}
                 <br></br>
                 <a href={url} target='_blank' rel="noreferrer">
                     Link Here
