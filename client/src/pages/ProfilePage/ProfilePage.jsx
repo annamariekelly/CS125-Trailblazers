@@ -116,15 +116,6 @@ const ProfilePage = () => {
                 </h1>
 
                 {ProfileInfo(student_id)}
-
-                <div>
-                    <button onClick={() => navigate('/saved', { state: { student_id: student_id } })}>
-                        Saved Trips
-                    </button>
-                    <button onClick={() => navigate('/past', { state: { student_id: student_id } })}>
-                        Past Trips
-                    </button>
-                </div>
                 
                 <a href="/">
                     <button className="gray-button">

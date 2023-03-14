@@ -10,8 +10,6 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import HomePage from './pages/HomePage/HomePage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
-import SavedPage from './pages/SavedPage.jsx';
-import PastPage from './pages/PastPage.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,8 +22,6 @@ root.render(
           <Route path="login" element={<LoginPage />} />
           <Route path="home" element={<HomePage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="saved" element={<SavedPage />} />
-          <Route path="past" element={<PastPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
