@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Rating from '@mui/material/Rating';
 
+import './TripCard.css';
+
 import { updateTrip } from "../database/supabase";
 
 const TripCard = ({studentId, businessId, name, uRating, yRating, dist, img, url, street, city}) => {
@@ -23,10 +25,14 @@ const TripCard = ({studentId, businessId, name, uRating, yRating, dist, img, url
     }
 
     return (
-        <div>
-            <h1>
+        <div className="trip-card-container">
+            <h2>
                 {name}
-            </h1>
+            </h2>
+
+            <h3>
+                {(dist * 0.000621371).toFixed(2)} miles away
+            </h3>
 
             <h4>
                 User Rating: {<Rating
@@ -43,7 +49,6 @@ const TripCard = ({studentId, businessId, name, uRating, yRating, dist, img, url
                                 readOnly
                             />}
                 <br></br>
-                {dist} miles?
             </h4>
             
             <img src={img} width='300px' alt={name}/>

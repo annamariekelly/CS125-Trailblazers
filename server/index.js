@@ -8,9 +8,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 
-app.get("/recommendation", async (req, res) => {
+app.post("/recommendation", async (req, res) => {
     try {
-        console.log('req body ', req.body);
         const { studentID, currentLocation, terrainPreference, maxTime, intensity } = req.body;
 
         const recList = await getRecList(studentID, currentLocation, terrainPreference, maxTime, intensity);

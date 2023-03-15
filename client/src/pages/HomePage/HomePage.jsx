@@ -29,6 +29,7 @@ const HomePage = () => {
     const [intensity, setIntensity] = useState(0);
     const [time, setTime] = useState(TIMES[0]);
     const [pastTrips, setPastTrips] = useState([]);
+    const [recTrips, setRecTrips] = useState([]);
 
     useEffect(() => {
         fetchUser(student_id)
@@ -43,9 +44,10 @@ const HomePage = () => {
                     console.log(`place cat enum: ${place_category_enum}`);
                     setUserPlaceCategoryEnum(place_category_enum);
 
-                    const userLocation = getCurrentLocation(student_id);
-                    console.log(`location: ${userLocation}`);
-                    setUserLocation(userLocation);
+                    getCurrentLocation(student_id).then((userLocation) => {
+                        console.log(`location: ${userLocation}`);
+                        setUserLocation(userLocation);
+                    });
 
                 } else {
                     console.log('fetch user error: ', error.message);
@@ -63,13 +65,24 @@ const HomePage = () => {
                     console.log('get trips error: ', error.message);
                 }
             });
-
-        // getRecList(student_id, userLocation, userPlaceCategoryEnum, time, intensity)
-        //     .then((rec_list) => {
-        //         console.log(`Rec List`, rec_list);
-        //         setTrips(rec_list);
-        //     });
-    }, [intensity, student_id, time]);
+        
+        fetch('/recommendation', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                studentID: student_id,
+                currentLocation: userLocation,
+                terrainPreference: userPlaceCategoryEnum,
+                maxTime: time,
+                intensity,
+            })
+        })
+        .then((response) => response.json())
+        .then((rec_list) => {
+            console.log(`Rec List`, rec_list);
+            setRecTrips(rec_list.recList);
+        });
+    }, [intensity, time]);
 
     const handleFilterRatingDropdownChange = (event) => {
         setFilterRating(event.target.value);
@@ -113,7 +126,7 @@ const HomePage = () => {
                     </div>
                 </div>
                 {/* Replace sampleRecList with actual rec list */}
-                {sampleRecList.length > 0 && sampleRecList
+                {recTrips.length > 0 && recTrips
                     .filter(({rating}) => rating >= filterRating)
                     .map((business) => {
                         const { id, name, rating, distance, image_url, url, street, city } = business;
