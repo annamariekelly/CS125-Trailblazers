@@ -12,6 +12,10 @@ import { TERRAIN_TYPES, RATINGS, INTENSITIES, TIMES } from "../../constants.js";
 import TripCard from "../../components/TripCard";
 import NavBar from "../../components/NavBar";
 
+import { sampleRecList } from "../../backend/sampleRecList";
+
+// import { getRecList } from "../../backend/recAlgorithm";
+
 import "./HomePage.css";
 import "../globalStyles.css";
 
