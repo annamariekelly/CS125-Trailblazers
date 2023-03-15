@@ -25,3 +25,11 @@ p {
     font-size: 15px;
     padding: 0px !important;
 }
+
+.current-location-container {
+    text-align: center;
+}
+
+.current-location-header {
+    font-size: x-large;
+}
