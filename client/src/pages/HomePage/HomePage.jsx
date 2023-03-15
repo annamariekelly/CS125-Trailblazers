@@ -99,14 +99,12 @@ const HomePage = () => {
                 <h1>
                     Home Page
                 </h1>
-                <p>
+                {/* <p>
                     Welcome User: {student_id}
-                </p>
-                <div>
-                    <button onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
-                        Profile
-                    </button>
-                </div>
+                </p> */}
+                <button className="green-button" onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
+                    <p className="button-text">View User Profile</p>
+                </button>
                 <div className="home-filters">
                     <div>
                         <Dropdown label="Rating (>=):" items={RATINGS} handleChange={handleFilterRatingDropdownChange}/>

@@ -63,7 +63,8 @@ const TripCard = ({studentId, businessId, name, uRating, yRating, dist, img, url
                 <br></br>
                 {city}
             </p>
-            <a href={url} target='_blank' rel="noreferrer">
+            <br></br>
+            <a className="click-link" href={url} target='_blank' rel="noreferrer">
                 <b>Click For More</b>
             </a>
         </div>
