@@ -99,15 +99,17 @@ const HomePage = () => {
                 <h1>
                     Home Page
                 </h1>
-                {/* <p>
-                    Welcome User: {student_id}
-                </p> */}
                 <button className="green-button" onClick={() => navigate('/profile', { state: { student_id: student_id } })}>
                     <p className="button-text">View User Profile</p>
                 </button>
+                <h4 className="current-location-container">
+                    <span className="current-location-header">Current Location:</span>
+                    <br></br>
+                    {userLocation ? userLocation : 'Loading...'}
+                </h4>
                 <div className="home-filters">
                     <div>
-                        <Dropdown label="Rating (>=):" items={RATINGS} handleChange={handleFilterRatingDropdownChange}/>
+                        <Dropdown label="Yelp Rating (>=):" items={RATINGS} handleChange={handleFilterRatingDropdownChange}/>
                         {/* <p>Rating Chosen: {filterRating}</p> */}
                     </div>
                     <div>
