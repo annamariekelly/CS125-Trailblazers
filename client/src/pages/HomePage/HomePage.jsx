@@ -28,7 +28,7 @@ const HomePage = () => {
     const [filterRating, setFilterRating] = useState(0);
     const [intensity, setIntensity] = useState(0);
     const [time, setTime] = useState(TIMES[0]);
-    const [trips, setTrips] = useState([]);
+    const [pastTrips, setPastTrips] = useState([]);
 
     useEffect(() => {
         fetchUser(student_id)
@@ -57,7 +57,7 @@ const HomePage = () => {
         getTrips('Past', student_id)
             .then(({data, error}) => {
                 if (data) {
-                    setTrips(data);
+                    setPastTrips(data);
                     console.log('Past trips: ', data);
                 } else {
                     console.log('get trips error: ', error.message);
@@ -112,16 +112,20 @@ const HomePage = () => {
                         {/* <p>Time Chosen: {time}</p> */}
                     </div>
                 </div>
-                {trips.length > 0 && <div>{trips[0].business_id}</div>}
                 {/* Replace sampleRecList with actual rec list */}
                 {sampleRecList.length > 0 && sampleRecList
                     .filter(({rating}) => rating >= filterRating)
                     .map((business) => {
-                        const { name, rating, distance, image_url, url, street, city } = business;
+                        const { id, name, rating, distance, image_url, url, street, city } = business;
+
+                        const found = pastTrips.find((trip) => trip.business_id === id);
 
                         return (
                             <TripCard
+                                businessId={id}
+                                studentId={student_id}
                                 name={name}
+                                uRating={found?.rating}
                                 yRating={rating}
                                 dist={distance}
                                 img={image_url}

@@ -1,6 +1,26 @@
-import React  from "react";
+import React, { useState } from "react";
+import Rating from '@mui/material/Rating';
 
-const TripCard = ({name, uRating, yRating, dist, img, url, street, city}) => {
+import { updateTrip } from "../database/supabase";
+
+const TripCard = ({studentId, businessId, name, uRating, yRating, dist, img, url, street, city}) => {
+    const [userRating, setUserRating] = useState(uRating ? uRating : 0);
+
+    const handleUserRating = (_, newValue) => {
+       if (!newValue) {
+        return;
+       }
+
+        setUserRating(newValue);
+
+        updateTrip('Past', studentId, businessId, name, newValue)
+            .then((err) => {
+                if (err) {
+                    console.log('update past trip error: ', err.message);
+                }
+            }
+        );
+    }
 
     return (
         <div>
@@ -9,9 +29,19 @@ const TripCard = ({name, uRating, yRating, dist, img, url, street, city}) => {
             </h1>
 
             <h4>
-                User Rating: {uRating ? uRating : 'no rating'}
+                User Rating: {<Rating
+                                name="simple-controlled"
+                                value={userRating ? userRating : (uRating ? uRating : 0)}
+                                onChange={handleUserRating}
+                                precision={0.5}
+                            />}
                 <br></br>
-                Yelp Rating: {yRating}
+                Yelp Rating: {<Rating
+                                name="read-only"
+                                value={yRating}
+                                precision={0.5}
+                                readOnly
+                            />}
                 <br></br>
                 {dist} miles?
             </h4>

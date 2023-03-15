@@ -97,10 +97,11 @@ export const addTrip = async (trip_type, student_id, business_id, rating = null)
 }
 
 // Updates a trip for a user (mainly rating). Works for past and saved trips.
-export const updateTrip = async (trip_type, student_id, business_id, rating) => {
+// Since we're upserting, it'll insert if the trip doesn't exist, update if the trip does exist.
+export const updateTrip = async (trip_type, student_id, business_id, business_name, rating) => {
     const { error } = await supabase
         .from(`${trip_type}_Trips`)
-        .update({rating})
+        .upsert({student_id, business_id, business_name, rating})
         .eq('student_id', student_id)
         .eq('business_id', business_id);
 
