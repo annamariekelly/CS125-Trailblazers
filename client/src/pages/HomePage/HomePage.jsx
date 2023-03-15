@@ -121,7 +121,6 @@ const HomePage = () => {
                         {/* <p>Time Chosen: {time}</p> */}
                     </div>
                 </div>
-                {/* Replace sampleRecList with actual rec list */}
                 {recTrips.length > 0 && recTrips
                     .filter(({rating}) => rating >= filterRating)
                     .map((business) => {

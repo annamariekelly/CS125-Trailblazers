@@ -30,39 +30,42 @@ const TripCard = ({studentId, businessId, name, uRating, yRating, dist, img, url
                 {name}
             </h2>
 
-            <h3>
+            <p>
                 {(dist * 0.000621371).toFixed(2)} miles away
-            </h3>
+            </p>
 
-            <h4>
-                User Rating: {<Rating
+            <b>
+                <div className="rating">
+                    User Rating: {<Rating
                                 name="simple-controlled"
                                 value={userRating ? userRating : (uRating ? uRating : 0)}
                                 onChange={handleUserRating}
                                 precision={0.5}
                             />}
-                <br></br>
-                Yelp Rating: {<Rating
-                                name="read-only"
-                                value={yRating}
-                                precision={0.5}
-                                readOnly
-                            />}
-                <br></br>
-            </h4>
+                </div>
+                
+                {/* <br></br> */}
+                <div className="rating">
+                    Yelp Rating: {<Rating
+                                    name="read-only"
+                                    value={yRating}
+                                    precision={0.5}
+                                    readOnly
+                                />}
+                </div>
+                {/* <br></br> */}
+            </b>
             
-            <img src={img} width='300px' alt={name}/>
+            <img className="card-img" src={img} alt={name}/>
             
-            <h4>
+            <p>
                 {street}
                 <br></br>
                 {city}
-                <br></br>
-                <a href={url} target='_blank' rel="noreferrer">
-                    Link Here
-                </a>
-            </h4>
-
+            </p>
+            <a href={url} target='_blank' rel="noreferrer">
+                <b>Click For More</b>
+            </a>
         </div>
     );
 }
