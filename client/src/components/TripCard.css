@@ -1,6 +1,39 @@
-.trip-card-container {
-    border-radius: 5%;
+.trip-card-containers {
+    border-radius: 5px;
     border: 1px solid black;
     padding: 10px;
     margin-bottom: 20px;
+}
+
+.trip-card-container {
+    /* width: 80%; */
+    margin: 20px 20px 20px 20px;
+    padding: 20px;
+    border: 1px solid rgb(1, 87, 16);
+    border-radius: 5px;
+    background-color: rgb(220, 243, 220);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.card-img {
+    width: 100%;
+    padding-top: 15px;
+}
+
+h2 {
+    margin: 0;
+}
+
+p {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+a, .css-ryrseu-MuiRating-root, .css-iljtu2-MuiRating-root {
+    color:rgb(1, 87, 16) !important;
 }
