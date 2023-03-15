@@ -60,13 +60,14 @@ async function trimResults(studentID, results) {
     }
 
     let trimmedResults = [];
+    let ids = []
 
     const { data, error } = await getTrips("Past", studentID);
 
     if (data) {
         console.log("Request for Past Trips succeeded with data: ", data);
         for (const result of results) {
-            if (calcChance(result, data)) {
+            if (calcChance(result, data) && !ids.includes(result.id)) {
                 trimmedResults.push(
                     new Location(
                         result.id,
@@ -79,6 +80,7 @@ async function trimResults(studentID, results) {
                         result.rating
                     )
                 );
+                ids.push(result.id);
             }
         }
     } else {
